@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.ferienprojekt_ben.MietenController">
+   <children>
+      <ListView fx:id="lsMieten" layoutX="607.0" onMouseClicked="#getListIndex" prefHeight="600.0" prefWidth="393.0" />
+      <Button layoutX="14.0" layoutY="559.0" mnemonicParsing="false" onAction="#btnHome" text="Abbrechen" />
+      <DatePicker fx:id="datePickStart" layoutX="33.0" layoutY="60.0" />
+      <DatePicker fx:id="datePickEnd" layoutX="33.0" layoutY="99.0" />
+      <TextField fx:id="txtFahrzeug" layoutX="33.0" layoutY="162.0" onMouseClicked="#txtFahrClicked" prefHeight="27.0" prefWidth="188.0" promptText="Fahrzeug" />
+      <TextField fx:id="txtKunde" layoutX="33.0" layoutY="220.0" onMouseClicked="#txtKundClicked" prefHeight="27.0" prefWidth="188.0" promptText="Kunde" />
+      <Button layoutX="236.0" layoutY="220.0" mnemonicParsing="false" onAction="#btnNewKunde" prefHeight="27.0" prefWidth="113.0" text="Neuer Kunde" />
+      <Button layoutX="236.0" layoutY="162.0" mnemonicParsing="false" onAction="#btnNewFahrz" prefHeight="27.0" prefWidth="113.0" text="Neues Fahrzeug" />
+      <Button layoutX="31.0" layoutY="287.0" mnemonicParsing="false" onAction="#btnErstellen" text="Erstellen" />
+      <Label fx:id="lblFahrzeug" layoutX="33.0" layoutY="141.0" text="Label" />
+      <Label fx:id="lblKunde" layoutX="33.0" layoutY="201.0" text="Label" />
+      <ChoiceBox fx:id="timePickStart" layoutX="236.0" layoutY="60.0" prefHeight="27.0" prefWidth="113.0" />
+      <ChoiceBox fx:id="timePickEnd" layoutX="236.0" layoutY="99.0" prefHeight="27.0" prefWidth="113.0" />
+   </children>
+</AnchorPane>

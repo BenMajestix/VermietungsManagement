@@ -1,0 +1,108 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.mycompany.ferienprojekt_ben;
+
+/**
+ *
+ * @author benbartel
+ */
+public abstract class FahrzeugModel {
+    String hersteller;
+    String model;
+    String farbe;
+    boolean erhealtlich;
+    boolean inReperartur;
+    boolean inBenutzung;
+    int stundenKosten;
+    String typ;
+    int fahrzeugNummer;
+
+    public FahrzeugModel(String hersteller, String model, String farbe, boolean erhealtlich, boolean inReperartur, boolean inBenutzung, int stundenKosten, int fahrzeugNummer) {
+        this.hersteller = hersteller;
+        this.model = model;
+        this.farbe = farbe;
+        this.erhealtlich = erhealtlich;
+        this.inReperartur = inReperartur;
+        this.inBenutzung = inBenutzung;
+        this.stundenKosten = stundenKosten;
+        this.fahrzeugNummer = fahrzeugNummer;
+    }
+
+    
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public String getFarbe() {
+        return farbe;
+    }
+
+    public void setFarbe(String farbe) {
+        this.farbe = farbe;
+    }
+
+    public boolean isInReperartur() {
+        return inReperartur;
+    }
+
+    public void setInReperartur(boolean inReperartur) {
+        this.inReperartur = inReperartur;
+    }
+
+    public boolean isInBenutzung() {
+        return inBenutzung;
+    }
+
+    public void setInBenutzung(boolean inBenutzung) {
+        this.inBenutzung = inBenutzung;
+    }
+
+    public String getHersteller() {
+        return hersteller;
+    }
+
+    public void setHersteller(String hersteller) {
+        this.hersteller = hersteller;
+    }
+
+    public boolean isErhealtlich() {
+        return erhealtlich;
+    }
+
+    public void setErhealtlich(boolean erhealtlich) {
+        this.erhealtlich = erhealtlich;
+    }
+
+    public int getStundenKosten() {
+        return stundenKosten;
+    }
+
+    public void setStundenKosten(int stundenKosten) {
+        this.stundenKosten = stundenKosten;
+    }
+
+    public String getTyp() {
+        return typ;
+    }
+
+    public int getFahrzeugNummer() {
+        return fahrzeugNummer;
+    }
+
+    public void setFahrzeugNummer(int fahrzeugNummer) {
+        this.fahrzeugNummer = fahrzeugNummer;
+    }
+    
+    
+    
+    
+    
+}

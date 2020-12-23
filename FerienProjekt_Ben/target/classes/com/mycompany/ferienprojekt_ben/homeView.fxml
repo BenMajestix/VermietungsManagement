@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1000.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.ferienprojekt_ben.HomeController">
+    
+   <children>
+      <ListView fx:id="lsMain" onMouseClicked="#getListItemIndex" prefHeight="600.0" prefWidth="400.0" />
+      <Button layoutX="739.0" layoutY="557.0" mnemonicParsing="false" onAction="#btnFahrzeugAdd" prefHeight="29.0" prefWidth="247.0" text="Neue Fahrzeuge/Kunden hinzufügen" />
+      <Button layoutX="876.0" layoutY="518.0" mnemonicParsing="false" onAction="#btnNeueMiete" prefHeight="29.0" prefWidth="110.0" text="Neue Miete" />
+      <ChoiceBox fx:id="choiceTyp" layoutX="589.0" layoutY="20.0" onMouseClicked="#fillLsView" prefWidth="150.0" />
+      <ChoiceBox fx:id="choiceList" layoutX="425.0" layoutY="20.0" prefWidth="150.0" />
+      <Button layoutX="664.0" layoutY="54.0" mnemonicParsing="false" onAction="#btnAnwendenList" text="Anwenden" />
+      <Button layoutX="500.0" layoutY="54.0" mnemonicParsing="false" onAction="#btnAnwendenChoice" text="Anwenden" />
+   </children>
+</AnchorPane>
