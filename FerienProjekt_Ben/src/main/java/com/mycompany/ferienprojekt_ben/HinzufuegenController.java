@@ -55,7 +55,7 @@ public class HinzufuegenController implements Initializable {
     private CheckBox checkBox;
     @FXML
     private Label lblErklaerung;
-    
+    private boolean chosenInputMethod;
     /**
      * Initializes the controller class.
      * @param url
@@ -76,78 +76,114 @@ public class HinzufuegenController implements Initializable {
         indexForInput = 0;
         
         deactCheck();
-        
+        checkBox.setIndeterminate(true);
     }    
+    
+    
+    
     
     @FXML
     private void btnWeiter(ActionEvent event) throws IOException {
+        boolean inputEmpty = false;
+        if(chosenInputMethod){
+            if(txtInput.getText().strip() == ""){
+                inputEmpty = true;
+            }
+            else{inputEmpty = false;}
+        }
+        else if(!(chosenInputMethod)){
+            if(checkBox.isIndeterminate()){
+                inputEmpty = true;
+            }
+            else{inputEmpty = false;}
+        }
+        
         
         if(indexForInput == 0){
+            if(inputEmpty){lblErklaerung.setText("Bitte machen Sie eine Eingabe.");}
+            else{
             value0Input = txtInput.getText();
             txtInput.clear();
             indexForInput ++;
             changePrompt();
-            addToListView(value0Input);
+            addToListView(value0Input);}
         }
         else if(indexForInput == 1){
+            if(inputEmpty){lblErklaerung.setText("Bitte machen Sie eine Eingabe.");}
+            else{
             value1Input = txtInput.getText();
             txtInput.clear();
             indexForInput ++;
             changePrompt();
-            addToListView(value1Input);
+            addToListView(value1Input);}
         }
         else if(indexForInput == 2){
+            if(inputEmpty){lblErklaerung.setText("Bitte machen Sie eine Eingabe.");}
+            else{
             value2Input = txtInput.getText();
             txtInput.clear();
             indexForInput ++;
             changePrompt();
-            addToListView(value2Input);
+            addToListView(value2Input);}
         }
         else if(indexForInput == 3){
+            if(inputEmpty){lblErklaerung.setText("Bitte machen Sie eine Eingabe.");}
+            else{
             if(txtInput.isDisabled()){
-            value3Input = Boolean.toString(checkBox.isSelected());}
+            value3Input = Boolean.toString(checkBox.isSelected());
+            checkBox.setIndeterminate(true);}
             else{value3Input = txtInput.getText();
             txtInput.clear();}
             indexForInput ++;
             changePrompt();
-            addToListView(value3Input);
+            addToListView(value3Input);}
         }
         else if(indexForInput == 4){
+            if(inputEmpty){lblErklaerung.setText("Bitte machen Sie eine Eingabe.");}
+            else{
             if(txtInput.isDisabled()){
-            value4Input = Boolean.toString(checkBox.isSelected());}
+            value4Input = Boolean.toString(checkBox.isSelected());
+            checkBox.setIndeterminate(true);}
             else{value4Input = txtInput.getText();
             txtInput.clear();}
             indexForInput ++;
             changePrompt();
-            addToListView(value4Input);
+            addToListView(value4Input);}
         }
         else if(indexForInput == 5){
             if(classToCreate == 5){beenden();}else{
+            if(inputEmpty){lblErklaerung.setText("Bitte machen Sie eine Eingabe.");}
+            else{
             value5Input = txtInput.getText();
             txtInput.clear();}
             indexForInput ++;
             changePrompt();
-            addToListView(value5Input);
+            addToListView(value5Input);}
         }
         else if(indexForInput == 6){
             if(classToCreate == 4){beenden();}else{
+                if(inputEmpty){lblErklaerung.setText("Bitte machen Sie eine Eingabe.");}
+                else{
                 if(txtInput.isDisabled()){
-                    value6Input = Boolean.toString(checkBox.isSelected());}
+                    value6Input = Boolean.toString(checkBox.isSelected());
+                checkBox.setIndeterminate(true);}
                 else{
                     value6Input = txtInput.getText();
                     txtInput.clear();
             }   }
             indexForInput ++;
             changePrompt();
-            addToListView(value6Input);
+            addToListView(value6Input);}
         }
         else if(indexForInput == 7){
             if(classToCreate == 1 || classToCreate == 2 || classToCreate == 3){beenden();}else{
+            if(inputEmpty){lblErklaerung.setText("Bitte machen Sie eine Eingabe.");}
+            else{
             value7Input = txtInput.getText();
             txtInput.clear();}
             indexForInput ++;
             changePrompt();
-            addToListView(value7Input);
+            addToListView(value7Input);}
         }
         else{
             beenden();
@@ -217,12 +253,14 @@ public class HinzufuegenController implements Initializable {
         checkBox.setOpacity(100);
         checkBox.setDisable(false);
         checkBox.setText(" ");
+        chosenInputMethod = false;
     }
     public void deactCheck(){
         txtInput.setOpacity(100);
         txtInput.setDisable(false);
         checkBox.setOpacity(0);
         checkBox.setDisable(true);
+        chosenInputMethod = true;
     }
     
     
