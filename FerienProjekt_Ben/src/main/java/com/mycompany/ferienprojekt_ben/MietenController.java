@@ -148,12 +148,15 @@ public class MietenController implements Initializable {
     @FXML
     private void btnNewKunde(ActionEvent event) throws IOException {
         storeInCache();
+        App.setHinzuDirFromMiete(true);
         App.setRoot("hinzufuegenView");
+        
     }
 
     @FXML
     private void btnNewFahrz(ActionEvent event) throws IOException {
         storeInCache();
+        App.setHinzuDirFromMiete(true);
         App.setRoot("hinzufuegenView");
     }
 
@@ -168,12 +171,12 @@ public class MietenController implements Initializable {
             App.setCacheMieteEndTime(endTime);
         }
         if(!(datePickStart.getValue() == null)){
-            LocalDate startDate = datePickStart.getValue();
-            App.setCacheMieteStartDate(startDate);
+            LocalDate startDateTemp = datePickStart.getValue();
+            App.setCacheMieteStartDate(startDateTemp);
         }
         if(!(datePickEnd.getValue() == null)){
-            LocalDate endDate = datePickEnd.getValue();
-            App.setCacheMieteEndDate(endDate);
+            LocalDate endDateTemp = datePickEnd.getValue();
+            App.setCacheMieteEndDate(endDateTemp);
         }
         if(!(chosenFahrzeug == null)){
             App.setCacheMieteFahrzeug(chosenFahrzeug);

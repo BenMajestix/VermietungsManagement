@@ -8,7 +8,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
@@ -30,6 +29,9 @@ public class App extends Application {
     private static LocalTime cacheMieteEndTime;
     private static FahrzeugModel cacheMieteFahrzeug;
     private static KundenModel cacheMieteKunde;
+    
+    private static boolean hinzuDirFromMiete;
+    
     
     @Override
     public void start(Stage stage) throws IOException {
@@ -72,7 +74,7 @@ public class App extends Application {
         PrivatkundeModel k1 = new PrivatkundeModel("017642069", "Ben", "Bartel", kundenNum, "0167889945", "Hamburg");
         kunden.add(k1);
         kundenNum = kunden.size() + 1;
-        PrivatkundeModel k2 = new PrivatkundeModel("017642069", "Paul", "Bartel", kundenNum, "0167889945", "Hamburg");
+        PrivatkundeModel k2 = new PrivatkundeModel("017642069", "Sonja", "Bartel", kundenNum, "0167889945", "Hamburg");
         kunden.add(k2);
         kundenNum = kunden.size() + 1;
         GeschaeftskundeModel k3 = new GeschaeftskundeModel("Bremen", "017642069", "Matz", "Bartel", kundenNum, "0167889945", "Hamburg");
@@ -164,6 +166,14 @@ public class App extends Application {
 
     public static void setCacheMieteEndTime(LocalTime cacheMieteEndTime) {
         App.cacheMieteEndTime = cacheMieteEndTime;
+    }
+
+    public static boolean isHinzuDirFromMiete() {
+        return hinzuDirFromMiete;
+    }
+
+    public static void setHinzuDirFromMiete(boolean hinzuDirFromMiete) {
+        App.hinzuDirFromMiete = hinzuDirFromMiete;
     }
 
     

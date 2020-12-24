@@ -55,6 +55,7 @@ public class HinzufuegenController implements Initializable {
     private CheckBox checkBox;
     @FXML
     private Label lblErklaerung;
+    
     /**
      * Initializes the controller class.
      * @param url
@@ -201,7 +202,12 @@ public class HinzufuegenController implements Initializable {
         System.out.println("done");
         System.out.println(App.getKunden().get(App.getKunden().size()-1).nachname);
         System.out.println(App.getFahrzeuge().get(App.getFahrzeuge().size()-1).farbe);
-        App.setRoot("homeView");
+        
+        if(App.isHinzuDirFromMiete()){
+            App.setRoot("mietenView");
+        }
+        else{
+        App.setRoot("homeView");}
         
     }
     
@@ -379,7 +385,6 @@ public class HinzufuegenController implements Initializable {
 
     @FXML
     private void keyCheck(KeyEvent event) {
-        
         
         
     }

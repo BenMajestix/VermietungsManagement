@@ -62,7 +62,7 @@ public class HomeController implements Initializable {
                 //hier werden alle objekte aus der Fahrzeuge ArrayList ausgegeben und dann überprüft ob sie der gewählten Klasse entsprechen.
                 for(FahrzeugModel f : App.getFahrzeuge()){
                     if("PKW".equals(f.getTyp())){
-                        lsMain.getItems().add("Model: " + f.hersteller + " " + f.model + " Erhältlich: " + f.erhealtlich + " Kosten/hr : " + f.stundenKosten + " FahrzeugNummer: " + f.getFahrzeugNummer());
+                        lsMain.getItems().add("Model: " + f.hersteller + " " + f.model + " Erhältlich: " + f.erhealtlich + " Kosten/hr : " + f.stundenKosten + " F. Num.: " + f.getFahrzeugNummer());
                     }
                 }   break;
             case "LKW":
@@ -70,47 +70,47 @@ public class HomeController implements Initializable {
                 lsMain.getItems().clear();
                 for(FahrzeugModel f : App.getFahrzeuge()){
                     if("LKW".equals(f.getTyp())){
-                        lsMain.getItems().add("Model: " + f.hersteller + " " + f.model + " Erhältlich: " + f.erhealtlich + " Kosten/hr : " + f.stundenKosten + " FahrzeugNummer: " + f.getFahrzeugNummer());
+                        lsMain.getItems().add("Model: " + f.hersteller + " " + f.model + " Erhältlich: " + f.erhealtlich + " Kosten/hr : " + f.stundenKosten + " F. Num.: " + f.getFahrzeugNummer());
                     }
                 }   break;
             case "Van":
                 lsMain.getItems().clear();
                 for(FahrzeugModel f : App.getFahrzeuge()){
                     if("Van".equals(f.getTyp())){
-                        lsMain.getItems().add("Model: " + f.hersteller + " " + f.model + " Erhältlich: " + f.erhealtlich + " Kosten/hr : " + f.stundenKosten + " FahrzeugNummer: " + f.getFahrzeugNummer());
+                        lsMain.getItems().add("Model: " + f.hersteller + " " + f.model + " Erhältlich: " + f.erhealtlich + " Kosten/hr : " + f.stundenKosten + " F. Num.: " + f.getFahrzeugNummer());
                     }
                 }   break;
             case "Anhänger":
                 lsMain.getItems().clear();
                 for(FahrzeugModel f : App.getFahrzeuge()){
                     if("Anhaenger".equals(f.getTyp())){
-                        lsMain.getItems().add("Model: " + f.hersteller + " " + f.model + " Erhältlich: " + f.erhealtlich + " Kosten/hr : " + f.stundenKosten + " FahrzeugNummer: " + f.getFahrzeugNummer());
+                        lsMain.getItems().add("Model: " + f.hersteller + " " + f.model + " Erhältlich: " + f.erhealtlich + " Kosten/hr : " + f.stundenKosten + " F. Num.: " + f.getFahrzeugNummer());
                     }
                 }   break;
             case "Alle Fahrzeuge":
                 lsMain.getItems().clear();
                 for(FahrzeugModel f : App.getFahrzeuge()){
-                    lsMain.getItems().add("Model: " + f.hersteller + " " + f.model + " Erhältlich: " + f.erhealtlich + " Kosten/hr : " + f.stundenKosten + " FahrzeugNummer: " + f.getFahrzeugNummer());
+                    lsMain.getItems().add("Model: " + f.hersteller + " " + f.model + " Erhältlich: " + f.erhealtlich + " Kosten/hr : " + f.stundenKosten + " F. Num.: " + f.getFahrzeugNummer());
                 }   break;
                 
             case "Privatkunde":
                 lsMain.getItems().clear();
                 for(KundenModel f : App.getKunden()){
                     if("Privatkunde".equals(f.getKundenTyp())){
-                        lsMain.getItems().add("Name: " + f.vorname + " " + f.nachname + " " + " Telefonnummer: " + f.telefonNummer + " Kundennummer : " + f.kundenNummer);
+                        lsMain.getItems().add("Name: " + f.vorname + " " + f.nachname + " " + " Tel.: " + f.telefonNummer + " K.Num.: " + f.kundenNummer);
                     }
                 }   break;
             case "Geschäftskunde":
                 lsMain.getItems().clear();
                 for(KundenModel f : App.getKunden()){
                     if("Geschäftskunde".equals(f.getKundenTyp())){
-                        lsMain.getItems().add("Name: " + f.vorname + " " + f.nachname + " " + " Telefonnummer: " + f.telefonNummer + " Kundennummer : " + f.kundenNummer);
+                        lsMain.getItems().add("Name: " + f.vorname + " " + f.nachname + " " + " Tel.: " + f.telefonNummer + " K.Num.: " + f.kundenNummer);
                     }
                 }   break;
             case "Alle Kunden":
                 lsMain.getItems().clear();
                 for(KundenModel f : App.getKunden()){
-                    lsMain.getItems().add("Name: " + f.vorname + " " + f.nachname + " " + " Telefonnummer: " + f.telefonNummer + " Kundennummer : " + f.kundenNummer);
+                    lsMain.getItems().add("Name: " + f.vorname + " " + f.nachname + " " + " Tel.: " + f.telefonNummer + " K.Num.: " + f.kundenNummer);
                 }   break;
                 
             default:
@@ -125,6 +125,7 @@ public class HomeController implements Initializable {
     @FXML
     private void btnFahrzeugAdd(ActionEvent event) throws IOException {
         App.setRoot("hinzufuegenView");
+        System.out.println("works");
     }
 
     
