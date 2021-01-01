@@ -9,12 +9,12 @@ package com.mycompany.ferienprojekt_ben;
  *
  * @author benbartel
  */
-public class searchResult {
+public class SearchResultModel {
     String output;
     int searchScore;
     int superClass;
 
-    public searchResult(String output, int searchScore, int superClass) {
+    public SearchResultModel(String output, int searchScore, int superClass) {
         this.output = output;
         this.searchScore = searchScore;
         this.superClass = superClass;

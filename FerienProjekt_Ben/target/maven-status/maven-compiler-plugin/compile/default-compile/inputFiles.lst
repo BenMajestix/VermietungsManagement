@@ -1,5 +1,4 @@
 /Users/benbartel/Desktop/VermietungsManagement/FerienProjekt_Ben/src/main/java/module-info.java
-/Users/benbartel/Desktop/VermietungsManagement/FerienProjekt_Ben/src/main/java/com/mycompany/ferienprojekt_ben/searchResult.java
 /Users/benbartel/Desktop/VermietungsManagement/FerienProjekt_Ben/src/main/java/com/mycompany/ferienprojekt_ben/HinzufuegenController.java
 /Users/benbartel/Desktop/VermietungsManagement/FerienProjekt_Ben/src/main/java/com/mycompany/ferienprojekt_ben/PrivatkundeModel.java
 /Users/benbartel/Desktop/VermietungsManagement/FerienProjekt_Ben/src/main/java/com/mycompany/ferienprojekt_ben/mietenModel.java
@@ -14,3 +13,4 @@
 /Users/benbartel/Desktop/VermietungsManagement/FerienProjekt_Ben/src/main/java/com/mycompany/ferienprojekt_ben/GeschaeftskundeModel.java
 /Users/benbartel/Desktop/VermietungsManagement/FerienProjekt_Ben/src/main/java/com/mycompany/ferienprojekt_ben/PkwModel.java
 /Users/benbartel/Desktop/VermietungsManagement/FerienProjekt_Ben/src/main/java/com/mycompany/ferienprojekt_ben/VanModel.java
+/Users/benbartel/Desktop/VermietungsManagement/FerienProjekt_Ben/src/main/java/com/mycompany/ferienprojekt_ben/SearchResultModel.java

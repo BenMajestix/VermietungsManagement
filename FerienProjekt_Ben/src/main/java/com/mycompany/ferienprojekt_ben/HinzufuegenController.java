@@ -101,6 +101,7 @@ public class HinzufuegenController implements Initializable {
         
         if(indexForInput == 0){
             if(inputEmpty){lblErklaerung.setText("Bitte machen Sie eine Eingabe.");}
+            //else if(checkForInt())
             else{
             value0Input = txtInput.getText();
             txtInput.clear();
@@ -353,10 +354,12 @@ public class HinzufuegenController implements Initializable {
         
     }
     
-    
+    private void checkForInt(){
+        
+    }
     
     public void checkIntegerInput() throws InterruptedException{
-        if("".equals(txtInput.getText()) ) {}
+        if("".equals(txtInput.getText())) {}
         else{
             if(classToCreate == 0){
                 if(indexForInput == 5 || indexForInput == 6 || indexForInput == 7){

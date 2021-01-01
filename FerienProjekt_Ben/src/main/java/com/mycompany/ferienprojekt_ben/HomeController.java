@@ -15,8 +15,6 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
@@ -40,6 +38,7 @@ public class HomeController implements Initializable {
     private Label lblCurrDate;
     
     private boolean inObjectView;
+    private boolean inSearch;
     
     private FahrzeugModel chosenFahrzeug;
     private KundenModel chosenKunde;
@@ -84,7 +83,7 @@ public class HomeController implements Initializable {
         menuItemFahrz.setText("Fahrzeuge");
         menuItemKunde.setText("Kunden");
         menuItemMiete.setText("Mieten");
-        
+        subClassChoice = 0;
         searchResultSuperClass = new ArrayList(); 
         
         fillLsView();
@@ -107,8 +106,9 @@ public class HomeController implements Initializable {
     
     
     public void fillLsView(){
-        
+        inSearch = false;
         switch(subClassChoice){
+            case 0: lsMain.getItems().clear(); break;
             case 1: 
                 System.out.println("sub1");
                 System.out.println(superClassChoice);
@@ -225,7 +225,8 @@ public class HomeController implements Initializable {
     
     @FXML
     private void searchStart(KeyEvent event) {
-        ArrayList<searchResult> hits = new ArrayList();
+        inSearch = true;
+        ArrayList<SearchResultModel> hits = new ArrayList();
         
         lsMain.getItems().clear();
         searchResultSuperClass.clear();
@@ -243,30 +244,33 @@ public class HomeController implements Initializable {
             
             for (int i = 0; i < keyWordArr.length; i++){
                 for(var s : f.returnAllVar()){
-                    boolean exactHit = false;
                     String checkStringLow = s.toString().toLowerCase();
                     
-                    if(s.toString().contains(keyWordArr[i])){
+                    if(s.toString().equals(keyWordArr[i])){
                         keyWordFound = true;
-                        trefferScore = trefferScore + 3;
-                        exactHit = true;
+                        trefferScore = trefferScore + 12;
                         System.out.println("exact hit");
-                    }
-                    if(!(exactHit) && checkStringLow.contains(keyWordArr[i].toLowerCase())){
-                        keyWordFound = true;
-                        trefferScore ++;
-                        System.out.println("hit");
                     }
                     if(checkStringLow.equals(keyWordArr[i].toLowerCase())){
                         keyWordFound = true;
-                        trefferScore = trefferScore + 2;
+                        trefferScore = trefferScore + 5;
                         System.out.println("exact hit in lower");
+                    }
+                    if(s.toString().contains(keyWordArr[i])){
+                        keyWordFound = true;
+                        trefferScore = trefferScore + 2;
+                        System.out.println("hit");
+                    }
+                    if(checkStringLow.contains(keyWordArr[i].toLowerCase())){
+                        keyWordFound = true;
+                        trefferScore ++;
+                        System.out.println("hit in lowercase");
                     }
                 }
             }
             String output = "Model: " + f.hersteller + " " + f.model + " Erhältlich: " + f.erhealtlich + " Kosten/hr : " + f.stundenKosten + " F. Num.: " + f.getFahrzeugNummer();
             if(keyWordFound){
-                searchResult hit = new searchResult(output, trefferScore, 1);
+                SearchResultModel hit = new SearchResultModel(output, trefferScore, 1);
                 hits.add(hit);
                 System.out.println(hit.searchScore);
             }
@@ -279,30 +283,33 @@ public class HomeController implements Initializable {
             
             for (int i = 0; i < keyWordArr.length; i++){
                 for(var s : k.returnAllVar()){
-                    boolean exactHit = false;
                     String checkStringLow = s.toString().toLowerCase();
                     
-                    if(s.toString().contains(keyWordArr[i])){
+                    if(s.toString().equals(keyWordArr[i])){
                         keyWordFound = true;
-                        trefferScore = trefferScore + 2;
-                        exactHit = true;
+                        trefferScore = trefferScore + 12;
                         System.out.println("exact hit");
-                    }
-                    if(!(exactHit) && checkStringLow.contains(keyWordArr[i].toLowerCase())){
-                        keyWordFound = true;
-                        trefferScore ++;
-                        System.out.println("hit");
                     }
                     if(checkStringLow.equals(keyWordArr[i].toLowerCase())){
                         keyWordFound = true;
-                        trefferScore = trefferScore + 2;
+                        trefferScore = trefferScore + 5;
                         System.out.println("exact hit in lower");
+                    }
+                    if(s.toString().contains(keyWordArr[i])){
+                        keyWordFound = true;
+                        trefferScore = trefferScore + 2;
+                        System.out.println("hit");
+                    }
+                    if(checkStringLow.contains(keyWordArr[i].toLowerCase())){
+                        keyWordFound = true;
+                        trefferScore ++;
+                        System.out.println("hit in lowercase");
                     }
                 }
             }
             String output = "Name: " + k.vorname + " " + k.nachname + " " + " Tel.: " + k.telefonNummer + " K.Num.: " + k.kundenNummer;
             if(keyWordFound){
-                searchResult hit = new searchResult(output, trefferScore, 1);
+                SearchResultModel hit = new SearchResultModel(output, trefferScore, 1);
                 hits.add(hit);
                 System.out.println(hit.searchScore);
             }
@@ -315,48 +322,51 @@ public class HomeController implements Initializable {
             
             for (int i = 0; i < keyWordArr.length; i++){
                 for(var s : m.returnAllVar()){
-                    boolean exactHit = false;
                     String checkStringLow = s.toString().toLowerCase();
                     
-                    if(s.toString().contains(keyWordArr[i])){
+                    if(s.toString().equals(keyWordArr[i])){
                         keyWordFound = true;
-                        trefferScore = trefferScore + 2;
-                        exactHit = true;
+                        trefferScore = trefferScore + 12;
                         System.out.println("exact hit");
-                    }
-                    if(!(exactHit) && checkStringLow.contains(keyWordArr[i].toLowerCase())){
-                        keyWordFound = true;
-                        trefferScore ++;
-                        System.out.println("hit");
                     }
                     if(checkStringLow.equals(keyWordArr[i].toLowerCase())){
                         keyWordFound = true;
-                        trefferScore = trefferScore + 2;
+                        trefferScore = trefferScore + 5;
                         System.out.println("exact hit in lower");
                     }
+                    if(s.toString().contains(keyWordArr[i])){
+                        keyWordFound = true;
+                        trefferScore = trefferScore + 2;
+                        System.out.println("hit");
+                    }
+                    if(checkStringLow.contains(keyWordArr[i].toLowerCase())){
+                        keyWordFound = true;
+                        trefferScore ++;
+                        System.out.println("hit in lowercase");
+                    }
+                    
                 }
             }
             String output = "Kunde: " + m.getKunde().nachname + " | Fahrzeug: " + m.getFahrzeug().hersteller + " | Start: " + m.getStartDate().getDayOfMonth() + ". " + m.getStartDate().getMonth() + " | Ende: " + m.getEndDate().getDayOfMonth() + ". " + m.getEndDate().getMonth() + " | N.: " + m.getMietenNummer();
             if(keyWordFound){
-                searchResult hit = new searchResult(output, trefferScore, 1);
+                SearchResultModel hit = new SearchResultModel(output, trefferScore, 1);
                 hits.add(hit);
                 System.out.println(hit.searchScore);
             }
         }
-        sortResults(hits);
+        sortResults(hits, keyWord);
     }
     
-    private void sortResults(ArrayList<searchResult> hits){
-        Collections.sort(hits, new Comparator<searchResult>() {
+    private void sortResults(ArrayList<SearchResultModel> hits, String keyWord){
+        Collections.sort(hits, new Comparator<SearchResultModel>() {
             @Override
-            public int compare(searchResult o1, searchResult o2) {
+            public int compare(SearchResultModel o1, SearchResultModel o2) {
                 return Double.compare(o1.getSearchScore(), o2.getSearchScore());
             }
         });
-        
         Collections.reverse(hits);
-        
-        for(searchResult s : hits){
+        for(SearchResultModel s : hits){
+            
             switch(s.superClass){
                 case 1:
                     lsMain.getItems().add(s.output);
@@ -364,13 +374,12 @@ public class HomeController implements Initializable {
                     break;
                 case 2:
                     lsMain.getItems().add(s.output);
-                    searchResultSuperClass.add(3);
+                    searchResultSuperClass.add(2);
                     break;
                 case 3:
                     lsMain.getItems().add(s.output);
-                    searchResultSuperClass.add(2);
+                    searchResultSuperClass.add(3);
                     break;
-                
             }
         }
         System.out.println("stop");
@@ -396,7 +405,7 @@ public class HomeController implements Initializable {
         if(lsMain.getFocusModel().getFocusedItem() == null){System.out.println("nichts ausgewählt");}
         else{
             if(inObjectView == true){
-                //zurück btn in listview in der details ansicht
+                //ZURÜCK BTN in listview in der details ansicht
                 if(lsMain.getFocusModel().getFocusedIndex() == lsMain.getItems().size() - 1){
                     inObjectView = false;
                     fillLsView();
@@ -427,6 +436,38 @@ public class HomeController implements Initializable {
                 }
 
             }
+            else if(inSearch){
+                inObjectView = true;
+                int index = lsMain.getFocusModel().getFocusedIndex();
+                int superClass = searchResultSuperClass.get(index);
+                //falls auf ein item geklickt wurde, wird der inhalt der zeile als String zwischengespeichert.
+                String line = lsMain.getFocusModel().getFocusedItem().trim();
+                //dann nehme ich mir das letzte wort der zeile, welches immer der index des gewählten objekts in der jeweiligen ArrayList ist.
+                String[] words = line.split(" ");
+                String lastWord = words[words.length - 1];
+                //dieser Index wird noch zum einfacherem Bearbeiten als integer gespeichert.
+                int indexForEdit = Integer.parseInt(lastWord);
+                //searchResultSuperClass
+                if(superClass == 1){
+                    //es wird aus der choice box ausgelesen welche klasse ausgewählt ist
+                    //daraufhin wird dann das objekt mit dem index hier gespeichert
+                    chosenFahrzeug = App.getFahrzeuge().get(indexForEdit-1);
+                    //mit dieser methode wird die listview gelehrt und gefüllt mit allen variablen des objekts
+                    fillListViewItem();
+                    System.out.println("details fahrzeug");
+                }
+                else if(superClass == 2){
+                    chosenKunde = App.getKunden().get(indexForEdit-1);
+                    fillListViewItem();
+                    System.out.println("details kunden");
+                }
+                else if(superClass == 3){
+                    chosenMiete = App.getMieten().get(indexForEdit - 1);
+                    fillListViewItem();
+                    System.out.println("details mieten");
+                }
+            }
+            
             //wird ausgeführt wenn man in normal ansicht ist, also nicht details ansicht
             else{
                 inObjectView = true;

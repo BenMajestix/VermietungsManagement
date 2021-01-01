@@ -10,8 +10,8 @@ com/mycompany/ferienprojekt_ben/KundenModel.class
 com/mycompany/ferienprojekt_ben/FahrzeugModel.class
 module-info.class
 com/mycompany/ferienprojekt_ben/PrivatkundeModel.class
+com/mycompany/ferienprojekt_ben/SearchResultModel.class
 com/mycompany/ferienprojekt_ben/MietenController.class
 com/mycompany/ferienprojekt_ben/VanModel.class
-com/mycompany/ferienprojekt_ben/searchResult.class
 com/mycompany/ferienprojekt_ben/HomeController$1.class
 com/mycompany/ferienprojekt_ben/LkwModel.class
