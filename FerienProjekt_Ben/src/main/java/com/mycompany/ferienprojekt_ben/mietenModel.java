@@ -7,6 +7,8 @@ package com.mycompany.ferienprojekt_ben;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,34 +19,52 @@ public class mietenModel {
     private LocalDateTime endDate;
     private FahrzeugModel fahrzeug;
     private KundenModel kunde;
-    private double zeitraum;
-    private double kosten;
+    private int zeitraum;
+    private int kosten;
+    private boolean abgelaufen;
+    private int mietenNummer;
 
     public mietenModel(LocalDateTime startDate, LocalDateTime endDate, FahrzeugModel fahrzeug, KundenModel kunde) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.fahrzeug = fahrzeug;
         this.kunde = kunde;
-        
-        //calcZeitraum();
-        //calcKosten();
+        abgelaufen = false;
+        calcZeitraum();
+        calcKosten();
+        mietenNummer = App.getMieten().size() +1;
     }
     
     
     
     public void calcZeitraum(){
         Duration duration = Duration.between(startDate, endDate);
-        zeitraum = duration.toHours();
+        zeitraum = (int) duration.toHours();
         System.out.println("zeitraum: "+zeitraum);
+        calcKosten();
     }
     
     public void calcKosten(){
         kosten = zeitraum * fahrzeug.stundenKosten;
-        System.out.println("kosten: "+kosten);
+        System.out.println("kosten: "+ kosten);
     }
     
     
-    
+    public ArrayList returnAllVar(){
+        ArrayList<String> allVar = new ArrayList();
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");  
+        String start = getStartDate().format(format);
+        String ende = getEndDate().format(format);
+        
+        allVar.add("Start Datum: " + start);
+        allVar.add("End Datum: " + ende);
+        allVar.add(getFahrzeug().hersteller + " " + getFahrzeug().model);
+        allVar.add(getKunde().vorname + " " + getKunde().nachname);
+        allVar.add("Zeitraum: " + zeitraum + "h");
+        allVar.add("Kosten: " + kosten + "€");
+        
+        return allVar;
+    }
 
     public LocalDateTime getStartDate() {
         return startDate;
@@ -78,24 +98,36 @@ public class mietenModel {
         this.kunde = kunde;
     }
 
-    public double getZeitraum() {
+    public int getZeitraum() {
         return zeitraum;
     }
 
-    public void setZeitraum(double zeitraum) {
+    public void setZeitraum(int zeitraum) {
         this.zeitraum = zeitraum;
     }
 
-    public double getKosten() {
-        
-        
-        
-        
+    public int getKosten() {
         return kosten;
     }
 
-    public void setKosten(double kosten) {
+    public void setKosten(int kosten) {
         this.kosten = kosten;
+    }
+
+    public boolean isAbgelaufen() {
+        return abgelaufen;
+    }
+
+    public void setAbgelaufen(boolean abgelaufen) {
+        this.abgelaufen = abgelaufen;
+    }
+
+    public int getMietenNummer() {
+        return mietenNummer;
+    }
+
+    public void setMietenNummer(int mietenNummer) {
+        this.mietenNummer = mietenNummer;
     }
     
     

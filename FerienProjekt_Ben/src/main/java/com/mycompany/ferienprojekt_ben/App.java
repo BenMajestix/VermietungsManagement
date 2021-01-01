@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
@@ -22,6 +23,8 @@ public class App extends Application {
     private static ArrayList<mietenModel> mieten;
     private static int choiceForEditViewIndex;
     private static String choiceForEditViewTyp;
+    
+    private static LocalDateTime currDateTime;
     
     private static LocalDate cacheMieteStartDate;
     private static LocalDate cacheMieteEndDate;
@@ -56,17 +59,17 @@ public class App extends Application {
         
         //es werden fürs testen eine menge fahrzeuge und Kunden hinzugefügt.
         int fahrzeugNum = fahrzeuge.size() + 1;
-        LkwModel m1 = new LkwModel(170, "VW", "Truck", "Schwarz", true, false, false, 24, fahrzeugNum);
-        fahrzeuge.add(m1);
+        LkwModel f1 = new LkwModel(170, "VW", "Truck", "Schwarz", true, false, false, 24, fahrzeugNum);
+        fahrzeuge.add(f1);
         fahrzeugNum = fahrzeuge.size() + 1;
-        PkwModel m2 = new PkwModel(5, 210, "Tesla", "Model S", "Schwarz", true, false, false, 30, fahrzeugNum);
-        fahrzeuge.add(m2);
+        PkwModel f2 = new PkwModel(5, 210, "Tesla", "Model S", "Schwarz", true, false, false, 30, fahrzeugNum);
+        fahrzeuge.add(f2);
         fahrzeugNum = fahrzeuge.size() + 1;
-        AnhaengerModel m3 = new AnhaengerModel(70, "Kaefer", "Anhaenger", "Weiss", true, false, false, 24, fahrzeugNum);
-        fahrzeuge.add(m3);
+        AnhaengerModel f3 = new AnhaengerModel(70, "Kaefer", "Anhaenger", "Weiss", true, false, false, 24, fahrzeugNum);
+        fahrzeuge.add(f3);
         fahrzeugNum = fahrzeuge.size() + 1;
-        VanModel m4 = new VanModel(true, "VW", "Van", "Schwarz", true, false, false, 24, fahrzeugNum);
-        fahrzeuge.add(m4);
+        VanModel f4 = new VanModel(true, "VW", "Van", "Schwarz", true, false, false, 24, fahrzeugNum);
+        fahrzeuge.add(f4);
         
         
         
@@ -83,7 +86,18 @@ public class App extends Application {
         GeschaeftskundeModel k4 = new GeschaeftskundeModel("Duisburg", "017642069", "Peer", "Bartel", kundenNum, "0167889945", "Hamburg");
         kunden.add(k4);
         
+        LocalDateTime t1 = LocalDateTime.of(2020, 12, 24, 15, 30);
+        LocalDateTime t2 = LocalDateTime.of(2020, 12, 27, 17, 45);
+        LocalDateTime t3 = LocalDateTime.of(2020, 12, 4, 12, 00);
+        LocalDateTime t4 = LocalDateTime.of(2021, 01, 15, 10, 00);
+        mietenModel m1 = new mietenModel(t1, t2, App.getFahrzeuge().get(1), App.getKunden().get(2));
+        m1.setMietenNummer(mieten.size()+1);
+        mieten.add(m1);
+        mietenModel m2 = new mietenModel(t3, t4, App.getFahrzeuge().get(3), App.getKunden().get(2));
+        m2.setMietenNummer(mieten.size()+1);
         
+        mieten.add(m2);
+        currDateTime = LocalDateTime.now();
         
         launch();
     }
@@ -174,6 +188,14 @@ public class App extends Application {
 
     public static void setHinzuDirFromMiete(boolean hinzuDirFromMiete) {
         App.hinzuDirFromMiete = hinzuDirFromMiete;
+    }
+
+    public static LocalDateTime getCurrDateTime() {
+        return currDateTime;
+    }
+
+    public static void setCurrDateTime(LocalDateTime currDateTime) {
+        App.currDateTime = currDateTime;
     }
 
     

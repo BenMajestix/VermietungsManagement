@@ -10,10 +10,12 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.Month;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -58,6 +60,8 @@ public class MietenController implements Initializable {
     
     FahrzeugModel chosenFahrzeug;
     KundenModel chosenKunde;
+    @FXML
+    private Button erstellenBtn;
     
     
     
@@ -189,9 +193,63 @@ public class MietenController implements Initializable {
     public void restore(){
         if(!(App.getCacheMieteStartTime() == null)){
             startTime = App.getCacheMieteStartTime();
+            switch(startTime.getHour()){
+                case 0: timePickStart.setValue("24:00"); break;
+                case 1: timePickStart.setValue("01:00"); break;
+                case 2: timePickStart.setValue("02:00"); break;
+                case 3: timePickStart.setValue("03:00"); break;
+                case 4: timePickStart.setValue("04:00"); break;
+                case 5: timePickStart.setValue("05:00"); break;
+                case 6: timePickStart.setValue("06:00"); break;
+                case 7: timePickStart.setValue("07:00"); break;
+                case 8: timePickStart.setValue("08:00"); break;
+                case 9: timePickStart.setValue("09:00"); break;
+                case 10: timePickStart.setValue("10:00"); break;
+                case 11: timePickStart.setValue("11:00"); break;
+                case 12: timePickStart.setValue("12:00"); break;
+                case 13: timePickStart.setValue("13:00"); break;
+                case 14: timePickStart.setValue("14:00"); break;
+                case 15: timePickStart.setValue("15:00"); break;
+                case 16: timePickStart.setValue("16:00"); break;
+                case 17: timePickStart.setValue("17:00"); break;
+                case 18: timePickStart.setValue("18:00"); break;
+                case 19: timePickStart.setValue("19:00"); break;
+                case 20: timePickStart.setValue("20:00"); break;
+                case 21: timePickStart.setValue("21:00"); break;
+                case 22: timePickStart.setValue("22:00"); break;
+                case 23: timePickStart.setValue("23:00"); break;
+                
+            }
         }
         if(!(App.getCacheMieteEndTime() == null)){
             endTime = App.getCacheMieteEndTime();
+            switch(endTime.getHour()){
+                case 0: timePickEnd.setValue("24:00"); break;
+                case 1: timePickEnd.setValue("01:00"); break;
+                case 2: timePickEnd.setValue("02:00"); break;
+                case 3: timePickEnd.setValue("03:00"); break;
+                case 4: timePickEnd.setValue("04:00"); break;
+                case 5: timePickEnd.setValue("05:00"); break;
+                case 6: timePickEnd.setValue("06:00"); break;
+                case 7: timePickEnd.setValue("07:00"); break;
+                case 8: timePickEnd.setValue("08:00"); break;
+                case 9: timePickEnd.setValue("09:00"); break;
+                case 10: timePickEnd.setValue("10:00"); break;
+                case 11: timePickEnd.setValue("11:00"); break;
+                case 12: timePickEnd.setValue("12:00"); break;
+                case 13: timePickEnd.setValue("13:00"); break;
+                case 14: timePickEnd.setValue("14:00"); break;
+                case 15: timePickEnd.setValue("15:00"); break;
+                case 16: timePickEnd.setValue("16:00"); break;
+                case 17: timePickEnd.setValue("17:00"); break;
+                case 18: timePickEnd.setValue("18:00"); break;
+                case 19: timePickEnd.setValue("19:00"); break;
+                case 20: timePickEnd.setValue("20:00"); break;
+                case 21: timePickEnd.setValue("21:00"); break;
+                case 22: timePickEnd.setValue("22:00"); break;
+                case 23: timePickEnd.setValue("23:00"); break;
+                
+            }
         }
         if(!(App.getCacheMieteStartDate() == null)){
             startDate = App.getCacheMieteStartDate();
@@ -209,6 +267,7 @@ public class MietenController implements Initializable {
             chosenKunde = App.getCacheMieteKunde();
             txtKunde.setText(chosenKunde.vorname + " " + chosenKunde.nachname);
         }
+        
         nullCache();
     }
     
@@ -303,10 +362,10 @@ public class MietenController implements Initializable {
     
     public void createDateTime(){
         try{
-        startDate = datePickStart.getValue();}
+            startDate = datePickStart.getValue();}
         catch(Exception e){}
         try{
-        endDate = datePickEnd.getValue();}
+            endDate = datePickEnd.getValue();}
         catch(Exception e){}
         
         createLocalTimeStart();
@@ -321,10 +380,22 @@ public class MietenController implements Initializable {
     
     
     @FXML
-    private void btnErstellen(ActionEvent event) {
+    private void btnErstellen(ActionEvent event) throws IOException {
+        LocalDate s;
+        LocalDate e;
+        s = datePickStart.getValue();
+        e = datePickEnd.getValue();
+        if(e.isBefore(s)){
+            erstellenBtn.setText("Das EndDatum muss vor dem StartDatum sein!");
+        }
+        else{
+        createDateTime();
         mietenModel newMiete = new mietenModel(chosenStartDateTime, chosenEndDateTime, chosenFahrzeug, chosenKunde);
+        newMiete.setMietenNummer(App.getMieten().size()+1);
         App.getMieten().add(newMiete);
         System.out.println(App.getMieten().get(App.getMieten().size() -1));
+        App.setRoot("homeView");
+        nullCache();}
     }
 
     @FXML

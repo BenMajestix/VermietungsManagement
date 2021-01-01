@@ -5,6 +5,8 @@
  */
 package com.mycompany.ferienprojekt_ben;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author benbartel
@@ -14,7 +16,7 @@ public abstract class FahrzeugModel {
     String model;
     String farbe;
     boolean erhealtlich;
-    boolean inReperartur;
+    boolean inReperatur;
     boolean inBenutzung;
     int stundenKosten;
     String typ;
@@ -25,13 +27,34 @@ public abstract class FahrzeugModel {
         this.model = model;
         this.farbe = farbe;
         this.erhealtlich = erhealtlich;
-        this.inReperartur = inReperartur;
+        this.inReperatur = inReperartur;
         this.inBenutzung = inBenutzung;
         this.stundenKosten = stundenKosten;
         this.fahrzeugNummer = fahrzeugNummer;
     }
 
-    
+    public ArrayList returnAllVar(){
+        ArrayList<String> allVar = new ArrayList();
+        
+        allVar.add(getHersteller());
+        allVar.add(getModel());
+        allVar.add(getFarbe());
+        if(inBenutzung == true){
+            allVar.add("In Benutzung");
+        }
+        else if(inBenutzung == false){
+            allVar.add("Nicht in Benutzung");
+        }
+        if(inReperatur == true){
+            allVar.add("In Reperatur");
+        }
+        else if(inReperatur == false){
+            allVar.add("Nicht in Reperatur");
+        }
+        allVar.add("StundenKosten: " + getStundenKosten());
+        
+        return allVar;
+    }
 
     public String getModel() {
         return model;
@@ -49,12 +72,12 @@ public abstract class FahrzeugModel {
         this.farbe = farbe;
     }
 
-    public boolean isInReperartur() {
-        return inReperartur;
+    public boolean isInReperatur() {
+        return inReperatur;
     }
 
-    public void setInReperartur(boolean inReperartur) {
-        this.inReperartur = inReperartur;
+    public void setInReperatur(boolean inReperatur) {
+        this.inReperatur = inReperatur;
     }
 
     public boolean isInBenutzung() {
@@ -100,7 +123,6 @@ public abstract class FahrzeugModel {
     public void setFahrzeugNummer(int fahrzeugNummer) {
         this.fahrzeugNummer = fahrzeugNummer;
     }
-    
     
     
     

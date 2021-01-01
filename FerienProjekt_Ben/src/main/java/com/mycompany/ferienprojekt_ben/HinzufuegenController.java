@@ -86,7 +86,7 @@ public class HinzufuegenController implements Initializable {
     private void btnWeiter(ActionEvent event) throws IOException {
         boolean inputEmpty = false;
         if(chosenInputMethod){
-            if(txtInput.getText().strip() == ""){
+            if("".equals(txtInput.getText().strip())){
                 inputEmpty = true;
             }
             else{inputEmpty = false;}
@@ -279,6 +279,7 @@ public class HinzufuegenController implements Initializable {
                 case 6: lblErklaerung.setText("Sitze:"); break;
                 case 7: lblErklaerung.setText("PS:"); break;
                 case 8: lblErklaerung.setText("Beenden"); 
+                weiterBtn.setText("Beenden");
                 txtInput.setDisable(true);break;
             }
         }
@@ -292,6 +293,7 @@ public class HinzufuegenController implements Initializable {
                 case 5: lblErklaerung.setText("Stundenkosten:"); break;
                 case 6: lblErklaerung.setText("Laderaum in m^3:"); break;
                 case 7: lblErklaerung.setText("Beenden"); 
+                weiterBtn.setText("Beenden");
                 txtInput.setDisable(true);break;
             }
         }
@@ -304,7 +306,8 @@ public class HinzufuegenController implements Initializable {
                 case 4: lblErklaerung.setText("In Reperatur?"); actCheck(); break;
                 case 5: lblErklaerung.setText("Stundenkosten:"); break;
                 case 6: lblErklaerung.setText("Getoente Scheiben?"); actCheck(); break;
-                case 7: lblErklaerung.setText("Beenden"); 
+                case 7: lblErklaerung.setText("Beenden");
+                weiterBtn.setText("Beenden");
                 txtInput.setDisable(true);break;
             }
         }
@@ -317,7 +320,8 @@ public class HinzufuegenController implements Initializable {
                 case 4: lblErklaerung.setText("In Reperatur?"); actCheck(); break;
                 case 5: lblErklaerung.setText("Stundenkosten:"); break;
                 case 6: lblErklaerung.setText("Beladungslimit in kg:"); break;
-                case 7: lblErklaerung.setText("Beenden"); 
+                case 7: lblErklaerung.setText("Beenden");
+                weiterBtn.setText("Beenden");
                 txtInput.setDisable(true);break;
             }
         }
@@ -330,6 +334,7 @@ public class HinzufuegenController implements Initializable {
                 case 4: lblErklaerung.setText("Geschäfts Tel.:"); break;
                 case 5: lblErklaerung.setText("Geschäfts Addr.:"); break;
                 case 6: lblErklaerung.setText("Beenden"); 
+                weiterBtn.setText("Beenden");
                 txtInput.setDisable(true);break;
             }
         }
@@ -341,58 +346,49 @@ public class HinzufuegenController implements Initializable {
                 case 3: lblErklaerung.setText("Addresse:"); break;
                 case 4: lblErklaerung.setText("Notfall Kontakt:"); break;
                 case 5: lblErklaerung.setText("Beenden"); 
+                weiterBtn.setText("Beenden");
                 txtInput.setDisable(true);break;
             }
-        }
+        }                                      
         
     }
     
     
     
     public void checkIntegerInput() throws InterruptedException{
-        
-        
-        if(classToCreate == 0){
-            if(indexForInput == 5 || indexForInput == 6 || indexForInput == 7){
-                try{
-                    int i = Integer.parseInt(txtInput.getText());
+        if("".equals(txtInput.getText()) ) {}
+        else{
+            if(classToCreate == 0){
+                if(indexForInput == 5 || indexForInput == 6 || indexForInput == 7){
+                    intTry();
                 }
-                catch(NumberFormatException e){
-                    lblErklaerung.setText("Es dürfen nur Zahlen eingegeben werden.");
+            }
+            if(classToCreate == 1){
+                if(indexForInput == 5 || indexForInput == 6){
+                    intTry();
+                }
+            }
+            if(classToCreate == 2 && indexForInput == 5){
+                intTry();
+            }
+            if(classToCreate == 3){
+                if(indexForInput == 5 || indexForInput == 6){
+                    intTry();
                 }
             }
         }
-        if(classToCreate == 1){
-            if(indexForInput == 5 || indexForInput == 6){
-                try{
-                    int i = Integer.parseInt(txtInput.getText());
-                }
-                catch(NumberFormatException e){
-                    lblErklaerung.setText("Es dürfen nur Zahlen eingegeben werden.");
-                }
-            }
+    }
+    
+    private void intTry(){
+        try{
+            int i = Integer.parseInt(txtInput.getText().strip() );
+            changePrompt();
         }
-        if(classToCreate == 2 && indexForInput == 5){
-            try{
-                    int i = Integer.parseInt(txtInput.getText());
-                }
-                catch(NumberFormatException e){
-                    lblErklaerung.setText("Es dürfen nur Zahlen eingegeben werden.");
-                }
-        }
-        if(classToCreate == 3){
-            if(indexForInput == 5 || indexForInput == 6){
-                try{
-                    int i = Integer.parseInt(txtInput.getText());
-                }
-                catch(NumberFormatException e){
-                    lblErklaerung.setText("Es dürfen nur Zahlen eingegeben werden.");
-                }
-            }
+        catch(NumberFormatException e){
+            lblErklaerung.setText("Es dürfen nur Zahlen eingegeben werden.");
         }
         
     }
-    
     
     @FXML
     private void btnAnwenden(ActionEvent event) {

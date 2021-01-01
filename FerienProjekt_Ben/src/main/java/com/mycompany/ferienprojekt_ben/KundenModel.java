@@ -5,6 +5,8 @@
  */
 package com.mycompany.ferienprojekt_ben;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author benbartel
@@ -24,8 +26,33 @@ public abstract class KundenModel {
         this.kundenNummer = kundenNummer;
         this.telefonNummer = telefonNummer;
         this.addresse = addresse;
+        
+        
     }
 
+    public ArrayList returnAllVar(){
+        ArrayList<String> allVar = new ArrayList();
+        
+        allVar.add(getVorname());
+        allVar.add(getNachname());
+        allVar.add(getTelefonNummer());
+        allVar.add(getAddresse());
+        allVar.add(getKundenTyp());
+        allVar.add("KundenNummer : " + getKundenNummer());
+        
+        return allVar;
+    }
+    public ArrayList returnAllVarEdit(){
+        ArrayList<String> allVar = new ArrayList();
+        
+        allVar.add(getVorname());
+        allVar.add(getNachname());
+        allVar.add(getTelefonNummer());
+        allVar.add(getAddresse());
+        
+        return allVar;
+    }
+    
     public String getVorname() {
         return vorname;
     }
