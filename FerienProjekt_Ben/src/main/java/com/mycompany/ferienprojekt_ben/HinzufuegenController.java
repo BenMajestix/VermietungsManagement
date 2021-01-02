@@ -354,45 +354,63 @@ public class HinzufuegenController implements Initializable {
         
     }
     
-    private void checkForInt(){
-        
-    }
-    
-    public void checkIntegerInput() throws InterruptedException{
+    private boolean checkForInt(){
+        boolean isInt = true;
         if("".equals(txtInput.getText())) {}
         else{
             if(classToCreate == 0){
                 if(indexForInput == 5 || indexForInput == 6 || indexForInput == 7){
-                    intTry();
+                    try{
+                        int i = Integer.parseInt(txtInput.getText().strip());
+                    }
+                    catch(NumberFormatException e){
+                        isInt = false;
+                    }
                 }
             }
             if(classToCreate == 1){
                 if(indexForInput == 5 || indexForInput == 6){
-                    intTry();
+                    try{
+                        int i = Integer.parseInt(txtInput.getText().strip());
+                    }
+                    catch(NumberFormatException e){
+                        isInt = false;
+                    }
                 }
             }
             if(classToCreate == 2 && indexForInput == 5){
-                intTry();
+                try{
+                    int i = Integer.parseInt(txtInput.getText().strip());
+                }
+                catch(NumberFormatException e){
+                    isInt = false;
+                }
             }
             if(classToCreate == 3){
                 if(indexForInput == 5 || indexForInput == 6){
-                    intTry();
+                    try{
+                        int i = Integer.parseInt(txtInput.getText().strip());
+                    }
+                    catch(NumberFormatException e){
+                        isInt = false;
+                    }
                 }
             }
         }
+        return isInt;
     }
     
-    private void intTry(){
-        try{
-            int i = Integer.parseInt(txtInput.getText().strip() );
-            changePrompt();
-        }
-        catch(NumberFormatException e){
+    public void checkIntegerInput() throws InterruptedException{
+        if(!(checkForInt())){
             lblErklaerung.setText("Es dürfen nur Zahlen eingegeben werden.");
+            String edit = txtInput.getText().substring(0, txtInput.getText().length()-1);
+            txtInput.setText(edit);
+            txtInput.positionCaret(txtInput.getText().length());
         }
-        
+        else{changePrompt();}
     }
     
+   
     @FXML
     private void btnAnwenden(ActionEvent event) {
         switch(choiceErstellen.getValue()){
