@@ -55,6 +55,22 @@ public abstract class FahrzeugModel {
         
         return allVar;
     }
+    
+    //Returns all Data for the Search in homeView
+    public ArrayList returnAllData(){
+        ArrayList<String> allData = new ArrayList();
+        
+        allData.add(getHersteller());
+        allData.add(getModel());
+        allData.add(getFarbe());
+        
+        String kosten = getStundenKosten() + "";
+        allData.add(kosten.strip());
+        
+        String nummer = fahrzeugNummer + "";
+        allData.add(nummer.strip());
+        return allData;
+    }
 
     public String getModel() {
         return model;

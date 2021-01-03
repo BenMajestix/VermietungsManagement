@@ -11,36 +11,39 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 /**
  * FXML Controller class
  *
  * @author benbartel
  */
 public class HinzufuegenController implements Initializable {
-
-
+    @FXML
+    private ListView<String> lvNeuesObjekt;
     @FXML
     private Label lblInstructions;
+    @FXML
+    private Label lblErklaerung;
     @FXML
     private ChoiceBox<String> choiceErstellen;
     @FXML
     private TextField txtInput;
     @FXML
+    private Button anwendenBtn;
+    @FXML
     private Button weiterBtn;
     @FXML
-    private ListView<String> lvNeuesObjekt;
-    @FXML
-    private Button anwendenBtn;
+    private CheckBox checkBox;
     
+    //An welcher Stelle des Erstellvorgangs der Benutzer gerade ist
     private int indexForInput;
+    
+    //Alle Inputs, welche am Ende zu einem Objekt erstellt werden
     private String value0Input;
     private String value1Input;
     private String value2Input;
@@ -50,12 +53,13 @@ public class HinzufuegenController implements Initializable {
     private String value6Input;
     private String value7Input;
     
+    //Welches Objekt, also von welcher Klasse, es erstellt werden soll
     private int classToCreate;
-    @FXML
-    private CheckBox checkBox;
-    @FXML
-    private Label lblErklaerung;
+    //Ob ein Input durch das Textfield oder durch die CheckBox passiert
     private boolean chosenInputMethod;
+    
+    
+    
     /**
      * Initializes the controller class.
      * @param url
@@ -69,7 +73,7 @@ public class HinzufuegenController implements Initializable {
         choiceErstellen.getItems().add("Anhaenger");
         choiceErstellen.getItems().add("Geschaefts Kunde");
         choiceErstellen.getItems().add("Privat Kunde");
-        
+        System.out.println("--Choices Erstellt");
         weiterBtn.setDisable(true);
         txtInput.setDisable(true);
         
@@ -236,7 +240,7 @@ public class HinzufuegenController implements Initializable {
         value5Input = null;
         value6Input = null;
         value7Input = null;
-        System.out.println("done");
+        System.out.println("--Objekt erstellt");
         System.out.println(App.getKunden().get(App.getKunden().size()-1).nachname);
         System.out.println(App.getFahrzeuge().get(App.getFahrzeuge().size()-1).farbe);
         
@@ -255,6 +259,7 @@ public class HinzufuegenController implements Initializable {
         checkBox.setDisable(false);
         checkBox.setText(" ");
         chosenInputMethod = false;
+        System.out.println("--CheckBox activated");
     }
     public void deactCheck(){
         txtInput.setOpacity(100);
@@ -262,6 +267,7 @@ public class HinzufuegenController implements Initializable {
         checkBox.setOpacity(0);
         checkBox.setDisable(true);
         chosenInputMethod = true;
+        System.out.println("--CheckBox deactivated");
     }
     
     
@@ -438,11 +444,6 @@ public class HinzufuegenController implements Initializable {
         this.indexForInput = indexForInput;
     }
 
-    @FXML
-    private void keyCheck(KeyEvent event) {
-        
-        
-    }
 
     @FXML
     private void checkInput(ActionEvent event) {

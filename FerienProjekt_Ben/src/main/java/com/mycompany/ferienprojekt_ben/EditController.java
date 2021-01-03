@@ -324,21 +324,25 @@ public class EditController implements Initializable {
                 else{
                 switch(index){
                     case 0 : 
-                        if(choiceBoxTime.getValue() == null || datePickEdit.getValue() == null){System.out.println("err"); lblWarning.setText("Beide Felder müssen ausgefüllt sein.");}else{
-                        LocalDate dateStart = datePickEdit.getValue();
-                        LocalDateTime dateTimeStart = LocalDateTime.of(dateStart, createLocalTime());
-                        App.getMieten().get(indexOfItem-1).setStartDate(dateTimeStart);
-                        App.getMieten().get(indexOfItem-1).calcZeitraum();
-                        
-                        fillLsView();}
+                        if(choiceBoxTime.getValue() == null || datePickEdit.getValue() == null){System.out.println("err"); lblWarning.setText("Beide Felder müssen ausgefüllt sein.");}
+                        else{
+                            LocalDate dateStart = datePickEdit.getValue();
+                            LocalDateTime dateTimeStart = LocalDateTime.of(dateStart, createLocalTime());
+                        if(dateTimeStart.isAfter(App.getCurrDateTime())){System.out.println("err"); lblWarning.setText("Das Startdatum darf nicht vor dem aktuellen Datum sein.");} else{
+                        if(dateTimeStart.isAfter(App.getMieten().get(indexOfItem-1).getEndDate())){System.out.println("err"); lblWarning.setText("Das Startdatum darf nicht vor dem Enddatum sein.");} 
+                            App.getMieten().get(indexOfItem-1).setStartDate(dateTimeStart);
+                            App.getMieten().get(indexOfItem-1).calcZeitraum();
+                            fillLsView();}}
                         break;
                     case 1 : 
-                        if(choiceBoxTime.getValue() == null || datePickEdit.getValue() == null){System.out.println("err"); lblWarning.setText("Beide Felder müssen ausgefüllt sein.");}else{
-                        LocalDate dateEnd = datePickEdit.getValue();
-                        LocalDateTime dateTimeEnd = LocalDateTime.of(dateEnd, createLocalTime());
-                        App.getMieten().get(indexOfItem-1).setEndDate(dateTimeEnd);
-                        App.getMieten().get(indexOfItem-1).calcZeitraum();
-                        fillLsView();}
+                        if(choiceBoxTime.getValue() == null || datePickEdit.getValue() == null){System.out.println("err"); lblWarning.setText("Beide Felder müssen ausgefüllt sein.");}
+                        else{
+                            LocalDate dateEnd = datePickEdit.getValue();
+                            LocalDateTime dateTimeEnd = LocalDateTime.of(dateEnd, createLocalTime());
+                        if(dateTimeEnd.isBefore(App.getMieten().get(indexOfItem-1).getStartDate())){System.out.println("err"); lblWarning.setText("Das Enddatum darf nicht vor dem Startdatum sein.");}
+                            App.getMieten().get(indexOfItem-1).setEndDate(dateTimeEnd);
+                            App.getMieten().get(indexOfItem-1).calcZeitraum();
+                            fillLsView();}
                         break;
                     
                     case 4 : 

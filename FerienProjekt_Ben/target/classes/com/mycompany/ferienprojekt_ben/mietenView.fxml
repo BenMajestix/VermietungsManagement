@@ -8,28 +8,43 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.ferienprojekt_ben.MietenController">
-   <children>
-      <ListView fx:id="lsMieten" layoutX="607.0" onMouseClicked="#getListIndex" prefHeight="600.0" prefWidth="393.0" />
-      <Button layoutX="14.0" layoutY="559.0" mnemonicParsing="false" onAction="#btnHome" text="Abbrechen" />
-      <DatePicker fx:id="datePickStart" layoutX="33.0" layoutY="84.0" />
-      <DatePicker fx:id="datePickEnd" layoutX="33.0" layoutY="123.0" />
-      <TextField fx:id="txtFahrzeug" layoutX="35.0" layoutY="224.0" onMouseClicked="#txtFahrClicked" prefHeight="27.0" prefWidth="188.0" promptText="Fahrzeug" />
-      <TextField fx:id="txtKunde" layoutX="37.0" layoutY="289.0" onMouseClicked="#txtKundClicked" prefHeight="27.0" prefWidth="188.0" promptText="Kunde" />
-      <Button layoutX="240.0" layoutY="289.0" mnemonicParsing="false" onAction="#btnNewKunde" prefHeight="27.0" prefWidth="113.0" text="Neuer Kunde" />
-      <Button layoutX="238.0" layoutY="224.0" mnemonicParsing="false" onAction="#btnNewFahrz" prefHeight="27.0" prefWidth="113.0" text="Neues Fahrzeug" />
-      <Button fx:id="erstellenBtn" layoutX="33.0" layoutY="349.0" mnemonicParsing="false" onAction="#btnErstellen" text="Erstellen" />
-      <Label fx:id="lblFahrzeug" layoutX="37.0" layoutY="200.0" text="Wählen Sie ein Fahrzeug für die Miete" />
-      <Label fx:id="lblKunde" layoutX="37.0" layoutY="266.0" text="Wählen Sie einen Kunden für die Miete" />
-      <ChoiceBox fx:id="timePickStart" layoutX="236.0" layoutY="84.0" prefHeight="27.0" prefWidth="113.0" />
-      <ChoiceBox fx:id="timePickEnd" layoutX="236.0" layoutY="123.0" prefHeight="27.0" prefWidth="113.0" />
-      <Label layoutX="14.0" layoutY="14.0" text="AutoVermietung Barret">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1000.0"  xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.ferienprojekt_ben.MietenController">
+    
+    <children>
+      <AnchorPane layoutX="518.0" layoutY="123.0" prefHeight="476.0" prefWidth="482.0" style="-fx-background-color: grey;">
+         <children>
+            <ListView fx:id="lsMieten" layoutX="15.0" layoutY="62.0" onMouseClicked="#getListIndex" prefHeight="400.0" prefWidth="452.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutY="123.0" prefHeight="476.0" prefWidth="520.0" style="-fx-background-color: #e1e3e1;">
+         <children>
+            <Button fx:id="erstellenBtn" layoutX="35.0" layoutY="325.0" mnemonicParsing="false" onAction="#btnErstellen" text="Erstellen" />
+            <Button layoutX="427.0" layoutY="435.0" mnemonicParsing="false" onAction="#btnHome" text="Abbrechen" />
+         </children>
+      </AnchorPane>
+      <DatePicker fx:id="datePickStart" layoutX="35.0" layoutY="186.0" />
+      <DatePicker fx:id="datePickEnd" layoutX="35.0" layoutY="225.0" />
+      <TextField fx:id="txtFahrzeug" layoutX="35.0" layoutY="326.0" onMouseClicked="#txtFahrClicked" prefHeight="27.0" prefWidth="188.0" promptText="Fahrzeug" />
+      <TextField fx:id="txtKunde" layoutX="35.0" layoutY="391.0" onMouseClicked="#txtKundClicked" prefHeight="27.0" prefWidth="188.0" promptText="Kunde" />
+      <Button layoutX="242.0" layoutY="391.0" mnemonicParsing="false" onAction="#btnNewKunde" prefHeight="27.0" prefWidth="113.0" text="Neuer Kunde" />
+      <Button layoutX="240.0" layoutY="326.0" mnemonicParsing="false" onAction="#btnNewFahrz" prefHeight="27.0" prefWidth="113.0" text="Neues Fahrzeug" />
+      <Label fx:id="lblFahrzeug" layoutX="35.0" layoutY="302.0" text="Wählen Sie ein Fahrzeug für die Miete" />
+      <Label fx:id="lblKunde" layoutX="35.0" layoutY="368.0" text="Wählen Sie einen Kunden für die Miete" />
+      <ChoiceBox fx:id="timePickStart" layoutX="238.0" layoutY="186.0" prefHeight="27.0" prefWidth="113.0" />
+      <ChoiceBox fx:id="timePickEnd" layoutX="238.0" layoutY="225.0" prefHeight="27.0" prefWidth="113.0" />
+      <Label fx:id="lblDate" layoutX="35.0" layoutY="161.0" text="Wählen Sie ein Start und End Datum für die Miete" />
+      <Label layoutX="35.0" layoutY="14.0" prefHeight="77.0" prefWidth="482.0" text="KFZ-Vermietung Barret" textFill="#1b3061">
          <font>
-            <Font size="24.0" />
+            <Font size="44.0" />
          </font>
       </Label>
-      <Label layoutX="35.0" layoutY="59.0" text="Wählen Sie ein Start und End Datum für die Miete" />
+      <Text layoutX="130.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Weil Sie es SUPER wollen" textAlignment="RIGHT" wrappingWidth="337.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
       
    </children>
 </AnchorPane>

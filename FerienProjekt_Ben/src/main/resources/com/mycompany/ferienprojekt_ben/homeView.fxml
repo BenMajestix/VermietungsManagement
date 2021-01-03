@@ -8,41 +8,59 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1000.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.ferienprojekt_ben.HomeController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.ferienprojekt_ben.HomeController">
     
    <children>
-      <ListView fx:id="lsMain" layoutY="40.0" onMouseClicked="#getListItemIndex" prefHeight="560.0" prefWidth="400.0" />
-      <Button layoutX="739.0" layoutY="557.0" mnemonicParsing="false" onAction="#btnFahrzeugAdd" prefHeight="29.0" prefWidth="247.0" text="Neue Fahrzeuge/Kunden hinzufügen" />
-      <Button layoutX="876.0" layoutY="518.0" mnemonicParsing="false" onAction="#btnNeueMiete" prefHeight="29.0" prefWidth="110.0" text="Neue Miete" />
-      <Label fx:id="lblCurrTime" layoutX="859.0" layoutY="430.0" text="Label" />
-      <Label fx:id="lblCurrDate" layoutX="825.0" layoutY="391.0" text="Label" />
-      <Button layoutX="799.0" layoutY="425.0" mnemonicParsing="false" onAction="#btnTimeBack" text="&lt;" />
-      <Button layoutX="754.0" layoutY="386.0" mnemonicParsing="false" onAction="#btnDateBack" text="&lt;" />
-      <Button layoutX="946.0" layoutY="386.0" mnemonicParsing="false" onAction="#btnDateForth" text="&gt;" />
-      <Button layoutX="946.0" layoutY="425.0" mnemonicParsing="false" onAction="#btnTimeForth" text="&gt;" />
-      <Label layoutX="423.0" layoutY="14.0" text="AutoVermietung Barret">
+      <Label layoutX="35.0" layoutY="14.0" prefHeight="77.0" prefWidth="482.0" text="KFZ-Vermietung Barret" textFill="#1b3061">
          <font>
-            <Font size="24.0" />
+            <Font size="44.0" />
          </font>
       </Label>
-      <Label layoutX="423.0" layoutY="67.0" text="Auswahl zum Ansehen der Objekte" />
-      <MenuButton fx:id="menuSuperClass" layoutX="423.0" layoutY="92.0" mnemonicParsing="false" text="MenuButton">
-        <items>
-          <MenuItem fx:id="menuItemFahrz" mnemonicParsing="false" onAction="#menuItemFahrz" text="Action 1" />
-          <MenuItem fx:id="menuItemKunde" mnemonicParsing="false" onAction="#menuItemKunde" text="Action 2" />
-            <MenuItem fx:id="menuItemMiete" mnemonicParsing="false" onAction="#menuItemMiete" text="Unspecified Action" />
-        </items>
-      </MenuButton>
-      <MenuButton fx:id="menuSubClass" layoutX="539.0" layoutY="92.0" mnemonicParsing="false" text="MenuButton">
-        <items>
-            <MenuItem fx:id="menuItemSub5" mnemonicParsing="false" onAction="#menuItemSub5" text="Unspecified Action" />
-            <MenuItem fx:id="menuItemSub1" mnemonicParsing="false" onAction="#menuItemSub1" text="Unspecified Action" />
-          <MenuItem fx:id="menuItemSub2" mnemonicParsing="false" onAction="#menuItemSub2" text="Action 1" />
-          <MenuItem fx:id="menuItemSub3" mnemonicParsing="false" onAction="#menuItemSub3" text="Action 2" />
-            <MenuItem fx:id="menuItemSub4" mnemonicParsing="false" onAction="#menuItemSub4" text="Unspecified Action" />
-        </items>
-      </MenuButton>
-      <TextField fx:id="searchbar" layoutX="6.0" layoutY="7.0" onKeyTyped="#searchStart" prefHeight="29.0" prefWidth="291.0" />
+      <Text layoutX="130.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Weil Sie es SUPER wollen" textAlignment="RIGHT" wrappingWidth="337.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <AnchorPane layoutX="518.0" layoutY="123.0" prefHeight="476.0" prefWidth="482.0" style="-fx-background-color: grey;">
+         <children>
+            <ListView fx:id="lsMain" layoutX="16.0" layoutY="62.0" onMouseClicked="#getListItemIndex" prefHeight="400.0" prefWidth="452.0" />
+            <TextField fx:id="searchbar" layoutX="16.0" layoutY="22.0" onKeyTyped="#searchStart" prefHeight="29.0" prefWidth="291.0" promptText="SEARCH" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutY="123.0" prefHeight="476.0" prefWidth="520.0" style="-fx-background-color: #e1e3e1;">
+         <children>
+            <Button layoutX="35.0" layoutY="364.0" mnemonicParsing="false" onAction="#btnFahrzeugAdd" prefHeight="29.0" prefWidth="247.0" text="Neue Fahrzeuge/Kunden hinzufügen" />
+            <Button layoutX="35.0" layoutY="410.0" mnemonicParsing="false" onAction="#btnNeueMiete" prefHeight="29.0" prefWidth="110.0" text="Neue Miete" />
+            <Label fx:id="lblCurrTime" layoutX="80.0" layoutY="278.0" text="Label" />
+            <Label fx:id="lblCurrDate" layoutX="80.0" layoutY="240.0" text="Label" />
+            <Button layoutX="35.0" layoutY="273.0" mnemonicParsing="false" onAction="#btnTimeBack" text="&lt;" />
+            <Button layoutX="35.0" layoutY="235.0" mnemonicParsing="false" onAction="#btnDateBack" text="&lt;" />
+            <Button layoutX="184.0" layoutY="235.0" mnemonicParsing="false" onAction="#btnDateForth" text="&gt;" />
+            <Button layoutX="184.0" layoutY="273.0" mnemonicParsing="false" onAction="#btnTimeForth" text="&gt;" />
+            <Label layoutX="35.0" layoutY="30.0" prefHeight="24.0" prefWidth="356.0" text="Wählen Sie aus, was Sie bearbeiten wollen." textAlignment="CENTER">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <MenuButton fx:id="menuSuperClass" layoutX="35.0" layoutY="80.0" minWidth="120.0" mnemonicParsing="false" styleClass="superClassMenu" text="MenuButton">
+              <items>
+                <MenuItem fx:id="menuItemFahrz" mnemonicParsing="false" onAction="#menuItemFahrz" text="Action 1" />
+                <MenuItem fx:id="menuItemKunde" mnemonicParsing="false" onAction="#menuItemKunde" text="Action 2" />
+                  <MenuItem fx:id="menuItemMiete" mnemonicParsing="false" onAction="#menuItemMiete" text="Unspecified Action" />
+              </items>
+            </MenuButton>
+            <MenuButton fx:id="menuSubClass" layoutX="35.0" layoutY="121.0" minWidth="120.0" mnemonicParsing="false" text="MenuButton">
+              <items>
+                  <MenuItem fx:id="menuItemSub5" mnemonicParsing="false" onAction="#menuItemSub5" text="Unspecified Action" />
+                  <MenuItem fx:id="menuItemSub1" mnemonicParsing="false" onAction="#menuItemSub1" text="Unspecified Action" />
+                <MenuItem fx:id="menuItemSub2" mnemonicParsing="false" onAction="#menuItemSub2" text="Action 1" />
+                <MenuItem fx:id="menuItemSub3" mnemonicParsing="false" onAction="#menuItemSub3" text="Action 2" />
+                  <MenuItem fx:id="menuItemSub4" mnemonicParsing="false" onAction="#menuItemSub4" text="Unspecified Action" />
+              </items>
+            </MenuButton>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

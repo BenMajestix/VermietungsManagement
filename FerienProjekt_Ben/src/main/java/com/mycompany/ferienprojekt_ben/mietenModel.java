@@ -40,13 +40,11 @@ public class mietenModel {
     public void calcZeitraum(){
         Duration duration = Duration.between(startDate, endDate);
         zeitraum = (int) duration.toHours();
-        System.out.println("zeitraum: "+zeitraum);
         calcKosten();
     }
     
     public void calcKosten(){
         kosten = zeitraum * fahrzeug.stundenKosten;
-        System.out.println("kosten: "+ kosten);
     }
     
     
@@ -66,6 +64,31 @@ public class mietenModel {
         return allVar;
     }
 
+    //Returns all Data for the Search in homeView
+    public ArrayList returnAllData(){
+        ArrayList<String> allData = new ArrayList();
+        
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-mm-yyyy HH:mm");  
+        String start = getStartDate().format(format);
+        String ende = getEndDate().format(format);
+        
+        allData.add("Start Datum: " + start);
+        allData.add("End Datum: " + ende);
+        allData.add(getFahrzeug().hersteller);
+        allData.add(getFahrzeug().model);
+        allData.add(getKunde().vorname);
+        allData.add(getKunde().nachname);
+        
+        String zeit = zeitraum + " ";
+        allData.add(zeit.strip());
+        
+        String hrKosten = kosten + " ";
+        allData.add(hrKosten.strip());
+        
+        return allData;
+    }
+    
+    
     public LocalDateTime getStartDate() {
         return startDate;
     }

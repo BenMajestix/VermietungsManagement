@@ -9,23 +9,38 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.ferienprojekt_ben.EditController">
-   <children>
-      <ListView fx:id="lsItems" layoutX="633.0" layoutY="14.0" onMouseClicked="#getListItemIndex" prefHeight="573.0" prefWidth="353.0" />
-      <TextField fx:id="txtItemEdit" layoutX="400.0" layoutY="114.0" />
-      <Button fx:id="anwendenBtn" layoutX="401.0" layoutY="152.0" mnemonicParsing="false" onAction="#btnAnwenden" text="Anwenden" />
+    
+    <children>
+      <AnchorPane layoutY="123.0" prefHeight="476.0" prefWidth="520.0" style="-fx-background-color: #e1e3e1;">
+         <children>
+            <DatePicker fx:id="datePickEdit" layoutX="35.0" layoutY="65.0" />
+            <Label fx:id="lblInstructions" layoutX="35.0" layoutY="38.0" text="Label" />
+            <CheckBox fx:id="checkBox" layoutX="35.0" layoutY="70.0" mnemonicParsing="false" text="CheckBox" />
+            <TextField fx:id="txtItemEdit" layoutX="36.0" layoutY="66.0" />
+            <ChoiceBox fx:id="choiceBoxTime" layoutX="235.0" layoutY="66.0" prefHeight="27.0" prefWidth="81.0" />
+            <Button fx:id="anwendenBtn" layoutX="35.0" layoutY="104.0" mnemonicParsing="false" onAction="#btnAnwenden" text="Anwenden" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="518.0" layoutY="123.0" prefHeight="477.0" prefWidth="482.0" style="-fx-background-color: grey;">
+         <children>
+            <ListView fx:id="lsItems" layoutX="15.0" layoutY="62.0" onMouseClicked="#getListItemIndex" prefHeight="400.0" prefWidth="452.0" />
+         </children>
+      </AnchorPane>
       <Button layoutX="31.0" layoutY="545.0" mnemonicParsing="false" onAction="#btnHome" text="Home" />
-      <Label fx:id="lblInstructions" layoutX="401.0" layoutY="71.0" text="Label" />
-      <CheckBox fx:id="checkBox" layoutX="401.0" layoutY="119.0" mnemonicParsing="false" text="CheckBox" />
-      <Label layoutX="14.0" layoutY="14.0" text="AutoVermietung Barret">
+      <Label fx:id="lblWarning" layoutX="401.0" layoutY="88.0" text=" " />
+      <Label layoutX="35.0" layoutY="14.0" prefHeight="77.0" prefWidth="482.0" text="KFZ-Vermietung Barret" textFill="#1b3061">
          <font>
-            <Font size="24.0" />
+            <Font size="44.0" />
          </font>
       </Label>
-      <DatePicker fx:id="datePickEdit" layoutX="337.0" layoutY="114.0" />
-      <ChoiceBox fx:id="choiceBoxTime" layoutX="539.0" layoutY="115.0" prefHeight="27.0" prefWidth="81.0" />
-      <Label fx:id="lblWarning" layoutX="401.0" layoutY="88.0" text=" " />
+      <Text layoutX="130.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Weil Sie es SUPER wollen" textAlignment="RIGHT" wrappingWidth="337.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
       
    </children>
 </AnchorPane>

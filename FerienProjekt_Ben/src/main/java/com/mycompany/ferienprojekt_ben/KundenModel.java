@@ -53,6 +53,21 @@ public abstract class KundenModel {
         return allVar;
     }
     
+    //Returns all Data for the Search in homeView
+    public ArrayList returnAllData(){
+        ArrayList<String> allData = new ArrayList();
+        
+        allData.add(getVorname());
+        allData.add(getNachname());
+        allData.add(getTelefonNummer());
+        allData.add(getAddresse());
+        allData.add(getKundenTyp());
+        
+        String nummer = getKundenNummer() + " ";
+        allData.add(nummer.strip());
+        return allData;
+    }
+    
     public String getVorname() {
         return vorname;
     }

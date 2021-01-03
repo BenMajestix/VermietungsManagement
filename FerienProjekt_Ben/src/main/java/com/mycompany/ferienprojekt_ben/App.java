@@ -21,11 +21,15 @@ public class App extends Application {
     private static ArrayList<FahrzeugModel> fahrzeuge;
     private static ArrayList<KundenModel> kunden;
     private static ArrayList<mietenModel> mieten;
+    
+    //Der Index und die Klasse des gewählten Objekts aus der homeView Listview, zum auslesen des editController
     private static int choiceForEditViewIndex;
     private static String choiceForEditViewTyp;
     
+    //Current Date and Time
     private static LocalDateTime currDateTime;
     
+    //Zwischenspeicher für alle Felder in der MietenView
     private static LocalDate cacheMieteStartDate;
     private static LocalDate cacheMieteEndDate;
     private static LocalTime cacheMieteStartTime;
@@ -33,6 +37,8 @@ public class App extends Application {
     private static FahrzeugModel cacheMieteFahrzeug;
     private static KundenModel cacheMieteKunde;
     
+    //Ob der Benutzer von der MietenView zur HinzufuegenView umgeleitet wurde
+    //Wird auch benutzt, damit man aus der HinzuView auch zurück zur MietenView geleitet wird
     private static boolean hinzuDirFromMiete;
     
     
@@ -57,7 +63,24 @@ public class App extends Application {
         fahrzeuge = new ArrayList();
         mieten = new ArrayList();
         
-        //es werden fürs testen eine menge fahrzeuge und Kunden hinzugefügt.
+        //es werden fürs testen eine menge fahrzeuge und Kunden erstellt und den arrayLists hinzugefügt.
+        fahrzeugeErstellen();
+        System.out.println("--Fahrzeuge Erstellt");
+        kundenErstellen();
+        System.out.println("--Kunden Erstellt");
+        mietenErstellen();
+        System.out.println("--Mieten Erstellt");
+        
+        currDateTime = LocalDateTime.now();
+        System.out.println("--Aktuelles Datum gesetzt");
+        System.out.println(" ");
+        System.out.println("--Launch");
+        System.out.println(" ");
+        
+        launch();
+    }
+
+    public static void fahrzeugeErstellen(){
         int fahrzeugNum = fahrzeuge.size() + 1;
         LkwModel f1 = new LkwModel(170, "VW", "Truck", "Schwarz", true, false, false, 24, fahrzeugNum);
         fahrzeuge.add(f1);
@@ -70,9 +93,8 @@ public class App extends Application {
         fahrzeugNum = fahrzeuge.size() + 1;
         VanModel f4 = new VanModel(true, "VW", "Van", "Schwarz", true, false, false, 24, fahrzeugNum);
         fahrzeuge.add(f4);
-        
-        
-        
+    }
+    public static void kundenErstellen(){
         int kundenNum = kunden.size() + 1;
         PrivatkundeModel k1 = new PrivatkundeModel("017642069", "Ben", "Bartel", kundenNum, "0167889945", "Hamburg");
         kunden.add(k1);
@@ -85,7 +107,8 @@ public class App extends Application {
         kundenNum = kunden.size() + 1;
         GeschaeftskundeModel k4 = new GeschaeftskundeModel("Duisburg", "017642069", "Peer", "Bartel", kundenNum, "0167889945", "Hamburg");
         kunden.add(k4);
-        
+    }
+    public static void mietenErstellen(){
         LocalDateTime t1 = LocalDateTime.of(2020, 12, 24, 15, 30);
         LocalDateTime t2 = LocalDateTime.of(2020, 12, 27, 17, 45);
         LocalDateTime t3 = LocalDateTime.of(2020, 12, 4, 12, 00);
@@ -97,11 +120,8 @@ public class App extends Application {
         m2.setMietenNummer(mieten.size()+1);
         
         mieten.add(m2);
-        currDateTime = LocalDateTime.now();
-        
-        launch();
     }
-
+    
     public static ArrayList<mietenModel> getMieten() {
         return mieten;
     }

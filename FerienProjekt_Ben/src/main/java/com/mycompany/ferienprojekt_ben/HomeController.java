@@ -36,18 +36,6 @@ public class HomeController implements Initializable {
     private Label lblCurrTime;
     @FXML
     private Label lblCurrDate;
-    
-    private boolean inObjectView;
-    private boolean inSearch;
-    
-    private FahrzeugModel chosenFahrzeug;
-    private KundenModel chosenKunde;
-    private mietenModel chosenMiete;
-    
-    private int superClassChoice;
-    private int subClassChoice;
-    
-    private ArrayList<Integer> searchResultSuperClass;
     @FXML
     private MenuButton menuSuperClass;
     @FXML
@@ -70,29 +58,44 @@ public class HomeController implements Initializable {
     private MenuItem menuItemSub5;
     @FXML
     private TextField searchbar;
+    
+    private boolean inObjectView; //ObjektView ist, wenn ein Objekt ausgewählt wurde, und dessen Details angezeigt werden
+    private boolean inSearch; //inSearch, wenn gerade Suchergebnisse angezeigt werden
+    
+    //Die Auswahl aus dem Menu werden hier gespeichert, für einfacheres abgleichen
+    private int superClassChoice; //Hier die SuperKlasse 
+    private int subClassChoice; //Und Die SubKlasse, oder ob alle Objekte der SuperKlasse angezeigt werden sollen
+    
+    private FahrzeugModel chosenFahrzeug; //Wenn auf ein Objekt in der LSView geklickt wird, wird dies hier gespeichert, jenachdem was es ist, woanders
+    private KundenModel chosenKunde;
+    private mietenModel chosenMiete;
+    
+    private ArrayList<Integer> searchResultSuperClass; //es werden die Superklassen aller suchergebnisse hier in richtiger reihenfolge gespeichert, damit man die ergebnisse später identifizieren kann
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        searchResultSuperClass = new ArrayList(); 
         
-        //die choice box fürs auswählen der Superklasse wird mit den Optionen befüllt
         menuSuperClass.setText("Bitte Auswählen");
         menuSubClass.setText("Bitte Auswählen");
-        menuSubClass.setDisable(true);
         menuItemFahrz.setText("Fahrzeuge");
         menuItemKunde.setText("Kunden");
         menuItemMiete.setText("Mieten");
-        subClassChoice = 0;
-        searchResultSuperClass = new ArrayList(); 
+        System.out.println("--Prompts Set");
+        
+        menuSubClass.setDisable(true);
+        subClassChoice = 0; //Falls keine Choice ausgewählt wurde, kann es Fehler geben, da subClassChoice sonst null ist
         
         fillLsView();
+        System.out.println("--ListView gefüllt");
         
         lblCurrDate.setText(App.getCurrDateTime().getDayOfMonth() + ". " + App.getCurrDateTime().getMonth());
         lblCurrTime.setText(App.getCurrDateTime().getHour() + ":" + App.getCurrDateTime().getMinute() + " Uhr");
-        
+        System.out.println("--Datum und Zeit gesetzt");
         inObjectView = false;
-        
         
         checkMietenAblauf();
         
@@ -243,7 +246,7 @@ public class HomeController implements Initializable {
             int trefferScore = 0;
             
             for (int i = 0; i < keyWordArr.length; i++){
-                for(var s : f.returnAllVar()){
+                for(var s : f.returnAllData()){
                     String checkStringLow = s.toString().toLowerCase();
                     
                     if(s.toString().equals(keyWordArr[i])){
@@ -281,8 +284,10 @@ public class HomeController implements Initializable {
             boolean keyWordFound = false;
             int trefferScore = 0;
             
+            
+            
             for (int i = 0; i < keyWordArr.length; i++){
-                for(var s : k.returnAllVar()){
+                for(var s : k.returnAllData()){
                     String checkStringLow = s.toString().toLowerCase();
                     
                     if(s.toString().equals(keyWordArr[i])){
@@ -309,7 +314,7 @@ public class HomeController implements Initializable {
             }
             String output = "Name: " + k.vorname + " " + k.nachname + " " + " Tel.: " + k.telefonNummer + " K.Num.: " + k.kundenNummer;
             if(keyWordFound){
-                SearchResultModel hit = new SearchResultModel(output, trefferScore, 1);
+                SearchResultModel hit = new SearchResultModel(output, trefferScore, 2);
                 hits.add(hit);
                 System.out.println(hit.searchScore);
             }
@@ -321,7 +326,7 @@ public class HomeController implements Initializable {
             int trefferScore = 0;
             
             for (int i = 0; i < keyWordArr.length; i++){
-                for(var s : m.returnAllVar()){
+                for(var s : m.returnAllData()){
                     String checkStringLow = s.toString().toLowerCase();
                     
                     if(s.toString().equals(keyWordArr[i])){
@@ -349,13 +354,16 @@ public class HomeController implements Initializable {
             }
             String output = "Kunde: " + m.getKunde().nachname + " | Fahrzeug: " + m.getFahrzeug().hersteller + " | Start: " + m.getStartDate().getDayOfMonth() + ". " + m.getStartDate().getMonth() + " | Ende: " + m.getEndDate().getDayOfMonth() + ". " + m.getEndDate().getMonth() + " | N.: " + m.getMietenNummer();
             if(keyWordFound){
-                SearchResultModel hit = new SearchResultModel(output, trefferScore, 1);
+                SearchResultModel hit = new SearchResultModel(output, trefferScore, 3);
                 hits.add(hit);
                 System.out.println(hit.searchScore);
             }
         }
         sortResults(hits, keyWord);
     }
+    
+    
+    
     
     private void sortResults(ArrayList<SearchResultModel> hits, String keyWord){
         Collections.sort(hits, new Comparator<SearchResultModel>() {
@@ -382,7 +390,7 @@ public class HomeController implements Initializable {
                     break;
             }
         }
-        System.out.println("stop");
+        System.out.println("--Search End");
     }
     
     
@@ -391,7 +399,6 @@ public class HomeController implements Initializable {
     @FXML
     private void btnFahrzeugAdd(ActionEvent event) throws IOException {
         App.setRoot("hinzufuegenView");
-        System.out.println("works");
     }
 
     
@@ -400,11 +407,12 @@ public class HomeController implements Initializable {
     //diese methode wird aktiviert, wenn auf die listview geklickt wird.
     @FXML
     private void getListItemIndex(MouseEvent event) throws IOException{
-        
+        System.out.println("--Get Index");
         //um err zu vermeiden wird, falls der nutzer auf kein Item geklickt hat, nichts ausgeführt.
-        if(lsMain.getFocusModel().getFocusedItem() == null){System.out.println("nichts ausgewählt");}
+        if(lsMain.getFocusModel().getFocusedItem() == null){System.out.println("--Nichts ausgewählt");}
         else{
             if(inObjectView == true){
+                System.out.println("--In Objekt View");
                 //ZURÜCK BTN in listview in der details ansicht
                 if(lsMain.getFocusModel().getFocusedIndex() == lsMain.getItems().size() - 1){
                     inObjectView = false;
@@ -437,6 +445,7 @@ public class HomeController implements Initializable {
 
             }
             else if(inSearch){
+                System.out.println("--In Search");
                 inObjectView = true;
                 int index = lsMain.getFocusModel().getFocusedIndex();
                 int superClass = searchResultSuperClass.get(index);
@@ -505,6 +514,8 @@ public class HomeController implements Initializable {
     }
     
     public void fillListViewItem(){
+        System.out.println("--Into Details Objekt View");
+        
         lsMain.getItems().clear();
         
         if(!(chosenFahrzeug == null)){
@@ -557,6 +568,7 @@ public class HomeController implements Initializable {
     
         
     public void checkMietenAblauf(){
+        System.out.println("--Check Mieten Ablauf");
         if(!App.getMieten().isEmpty()){
             for(mietenModel m : App.getMieten()){
                 if(m.getEndDate().isBefore(App.getCurrDateTime())){
@@ -570,6 +582,7 @@ public class HomeController implements Initializable {
             }
         }
         else{}
+        System.out.println("--Done");
     }
     
     
