@@ -249,6 +249,8 @@ public class HomeController implements Initializable {
                 for(var s : f.returnAllData()){
                     String checkStringLow = s.toString().toLowerCase();
                     
+                    
+                    
                     if(s.toString().equals(keyWordArr[i])){
                         keyWordFound = true;
                         trefferScore = trefferScore + 12;
@@ -646,6 +648,7 @@ public class HomeController implements Initializable {
         menuItemSub5.setVisible(true);
         menuSuperClass.setText("Fahrzeuge");
         menuSubClass.setText("Bitte Auswählen");
+        inSearch = false;
         
         lsMain.getItems().clear();
         App.getFahrzeuge().forEach(f -> {
@@ -667,6 +670,7 @@ public class HomeController implements Initializable {
         menuSubClass.setDisable(false);
         menuSuperClass.setText("Kunden");
         menuSubClass.setText("Bitte Auswählen");
+        inSearch = false;
         
         lsMain.getItems().clear();
         App.getKunden().forEach(f -> {
@@ -688,6 +692,7 @@ public class HomeController implements Initializable {
         menuSubClass.setDisable(false);
         menuSuperClass.setText("Mieten");
         menuSubClass.setText("Bitte Auswählen");
+        inSearch = false;
         
         lsMain.getItems().clear();
         App.getMieten().forEach(m -> {
@@ -697,35 +702,35 @@ public class HomeController implements Initializable {
 
     @FXML
     private void menuItemSub1(ActionEvent event) {
-        
+        inSearch = false;
         subClassChoice = 1;
         fillLsView();
     }
 
     @FXML
     private void menuItemSub2(ActionEvent event) {
-        
+        inSearch = false;
         subClassChoice = 2;
         fillLsView();
     }
 
     @FXML
     private void menuItemSub3(ActionEvent event) {
-        
+        inSearch = false;
         subClassChoice = 3;
         fillLsView();
     }
 
     @FXML
     private void menuItemSub4(ActionEvent event) {
-        
+        inSearch = false;
         subClassChoice = 4;
         fillLsView();
     }
     
     @FXML
     private void menuItemSub5(ActionEvent event) {
-        
+        inSearch = false;
         subClassChoice = 5;
         fillLsView();
     }

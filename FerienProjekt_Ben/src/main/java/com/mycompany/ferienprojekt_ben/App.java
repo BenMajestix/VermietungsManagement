@@ -73,6 +73,7 @@ public class App extends Application {
         
         currDateTime = LocalDateTime.now();
         System.out.println("--Aktuelles Datum gesetzt");
+        System.out.println(currDateTime);
         System.out.println(" ");
         System.out.println("--Launch");
         System.out.println(" ");

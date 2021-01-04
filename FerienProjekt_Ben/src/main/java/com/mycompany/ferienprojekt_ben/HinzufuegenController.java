@@ -406,7 +406,7 @@ public class HinzufuegenController implements Initializable {
         return isInt;
     }
     
-    public void checkIntegerInput() throws InterruptedException{
+    public void checkIntegerInput(){
         if(!(checkForInt())){
             lblErklaerung.setText("Es dürfen nur Zahlen eingegeben werden.");
             String edit = txtInput.getText().substring(0, txtInput.getText().length()-1);

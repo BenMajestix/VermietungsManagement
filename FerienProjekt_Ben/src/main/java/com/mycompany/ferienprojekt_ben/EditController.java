@@ -21,6 +21,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
 /**
@@ -328,10 +329,12 @@ public class EditController implements Initializable {
                         else{
                             LocalDate dateStart = datePickEdit.getValue();
                             LocalDateTime dateTimeStart = LocalDateTime.of(dateStart, createLocalTime());
-                        if(dateTimeStart.isAfter(App.getCurrDateTime())){System.out.println("err"); lblWarning.setText("Das Startdatum darf nicht vor dem aktuellen Datum sein.");} else{
-                        if(dateTimeStart.isAfter(App.getMieten().get(indexOfItem-1).getEndDate())){System.out.println("err"); lblWarning.setText("Das Startdatum darf nicht vor dem Enddatum sein.");} 
+                        if(dateTimeStart.isBefore(App.getCurrDateTime())){System.out.println("err"); lblWarning.setText("Das Startdatum darf nicht vor dem aktuellen Datum sein.");} else{
+                        if(dateTimeStart.isAfter(App.getMieten().get(indexOfItem-1).getEndDate())){System.out.println("err"); lblWarning.setText("Das Startdatum darf nicht nach dem Enddatum sein.");} 
                             App.getMieten().get(indexOfItem-1).setStartDate(dateTimeStart);
                             App.getMieten().get(indexOfItem-1).calcZeitraum();
+                            datePickEdit.setValue(null);
+                            choiceBoxTime.setValue(null);
                             fillLsView();}}
                         break;
                     case 1 : 
@@ -342,6 +345,8 @@ public class EditController implements Initializable {
                         if(dateTimeEnd.isBefore(App.getMieten().get(indexOfItem-1).getStartDate())){System.out.println("err"); lblWarning.setText("Das Enddatum darf nicht vor dem Startdatum sein.");}
                             App.getMieten().get(indexOfItem-1).setEndDate(dateTimeEnd);
                             App.getMieten().get(indexOfItem-1).calcZeitraum();
+                            datePickEdit.setValue(null);
+                            choiceBoxTime.setValue(null);
                             fillLsView();}
                         break;
                     
@@ -737,6 +742,74 @@ public class EditController implements Initializable {
             }
         }
     }
+    /*
+    private GeschaeftskundeModel geschKunde;
+    private PrivatkundeModel privKunde;
+    
+    private PkwModel pkw;
+    private LkwModel lkw;
+    private VanModel van;
+    private AnhaengerModel anhaenger;
+    private mietenModel miete;
+    */
+    private boolean checkForInt(){
+        boolean isInt = true;
+        if("".equals(txtItemEdit.getText())) {}
+        else{
+            if(!(pkw == null) || !(lkw == null) || !(van == null) || !(anhaenger == null)){
+                if(index == 5){
+                    try{
+                        int i = Integer.parseInt(txtItemEdit.getText().strip());
+                    }
+                    catch(NumberFormatException e){
+                        isInt = false;
+                    }
+                }
+            }
+            if(!(pkw == null)){
+                if(index == 6 || index == 7){
+                    try{
+                        int i = Integer.parseInt(txtItemEdit.getText().strip());
+                    }
+                    catch(NumberFormatException e){
+                        isInt = false;
+                    }
+                }
+            }
+            if(!(lkw == null) && index == 6){
+                try{
+                    int i = Integer.parseInt(txtItemEdit.getText().strip());
+                }
+                catch(NumberFormatException e){
+                    isInt = false;
+                }
+            }
+            if(!(anhaenger == null) && index == 6){
+                try{
+                    int i = Integer.parseInt(txtItemEdit.getText().strip());
+                }
+                catch(NumberFormatException e){
+                    isInt = false;
+                }
+            }
+        }
+        return isInt;
+    }
+    
+    @FXML
+    private void checkInt(KeyEvent event) {
+        if(!(checkForInt())){
+            lblWarning.setText("Es dürfen nur Zahlen eingegeben werden.");
+            String edit = txtItemEdit.getText().substring(0, txtItemEdit.getText().length()-1);
+            txtItemEdit.setText(edit);
+            txtItemEdit.positionCaret(txtItemEdit.getText().length());
+        }
+        else{//changePrompt();
+        }
+        
+    }
+    
+    
 
     private void enableTextInput(){
         txtItemEdit.setVisible(true);
@@ -849,6 +922,8 @@ public class EditController implements Initializable {
     public void setInMieteChangeMode(boolean inMieteChangeMode) {
         this.inMieteChangeMode = inMieteChangeMode;
     }
+
+    
     
     
 }

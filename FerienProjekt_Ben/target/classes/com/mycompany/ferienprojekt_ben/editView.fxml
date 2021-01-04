@@ -19,9 +19,10 @@
             <DatePicker fx:id="datePickEdit" layoutX="35.0" layoutY="65.0" />
             <Label fx:id="lblInstructions" layoutX="35.0" layoutY="38.0" text="Label" />
             <CheckBox fx:id="checkBox" layoutX="35.0" layoutY="70.0" mnemonicParsing="false" text="CheckBox" />
-            <TextField fx:id="txtItemEdit" layoutX="36.0" layoutY="66.0" />
+            <TextField fx:id="txtItemEdit" layoutX="36.0" layoutY="66.0" onKeyTyped="#checkInt" />
             <ChoiceBox fx:id="choiceBoxTime" layoutX="235.0" layoutY="66.0" prefHeight="27.0" prefWidth="81.0" />
             <Button fx:id="anwendenBtn" layoutX="35.0" layoutY="104.0" mnemonicParsing="false" onAction="#btnAnwenden" text="Anwenden" />
+            <Label fx:id="lblWarning" layoutX="35.0" layoutY="14.0" text=" " />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="518.0" layoutY="123.0" prefHeight="477.0" prefWidth="482.0" style="-fx-background-color: grey;">
@@ -30,7 +31,6 @@
          </children>
       </AnchorPane>
       <Button layoutX="31.0" layoutY="545.0" mnemonicParsing="false" onAction="#btnHome" text="Home" />
-      <Label fx:id="lblWarning" layoutX="401.0" layoutY="88.0" text=" " />
       <Label layoutX="35.0" layoutY="14.0" prefHeight="77.0" prefWidth="482.0" text="KFZ-Vermietung Barret" textFill="#1b3061">
          <font>
             <Font size="44.0" />
