@@ -51,7 +51,7 @@ public abstract class FahrzeugModel {
         else if(inReperatur == false){
             allVar.add("Nicht in Reperatur");
         }
-        allVar.add("StundenKosten: " + getStundenKosten());
+        allVar.add("Stundenkosten: " + getStundenKosten());
         
         return allVar;
     }

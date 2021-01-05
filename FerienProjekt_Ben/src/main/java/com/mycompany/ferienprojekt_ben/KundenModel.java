@@ -33,11 +33,11 @@ public abstract class KundenModel {
     public ArrayList returnAllVar(){
         ArrayList<String> allVar = new ArrayList();
         
-        allVar.add(getVorname());
-        allVar.add(getNachname());
-        allVar.add(getTelefonNummer());
-        allVar.add(getAddresse());
-        allVar.add(getKundenTyp());
+        allVar.add("Vorname: "+getVorname());
+        allVar.add("Nachname: "+getNachname());
+        allVar.add("Telefonnummer: "+getTelefonNummer());
+        allVar.add("Addresse: "+getAddresse());
+        allVar.add("Kundentyp: "+getKundenTyp());
         allVar.add("KundenNummer : " + getKundenNummer());
         
         return allVar;

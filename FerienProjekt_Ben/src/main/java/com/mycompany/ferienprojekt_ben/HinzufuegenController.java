@@ -71,8 +71,8 @@ public class HinzufuegenController implements Initializable {
         choiceErstellen.getItems().add("LKW");
         choiceErstellen.getItems().add("Van");
         choiceErstellen.getItems().add("Anhaenger");
-        choiceErstellen.getItems().add("Geschaefts Kunde");
-        choiceErstellen.getItems().add("Privat Kunde");
+        choiceErstellen.getItems().add("Geschäftskunde");
+        choiceErstellen.getItems().add("Privatkunde");
         System.out.println("--Choices Erstellt");
         weiterBtn.setDisable(true);
         txtInput.setDisable(true);
@@ -81,6 +81,8 @@ public class HinzufuegenController implements Initializable {
         
         deactCheck();
         checkBox.setIndeterminate(true);
+        
+        lblInstructions.setText(" ");
     }    
     
     
@@ -259,7 +261,7 @@ public class HinzufuegenController implements Initializable {
         checkBox.setDisable(false);
         checkBox.setText(" ");
         chosenInputMethod = false;
-        System.out.println("--CheckBox activated");
+        
     }
     public void deactCheck(){
         txtInput.setOpacity(100);
@@ -267,7 +269,6 @@ public class HinzufuegenController implements Initializable {
         checkBox.setOpacity(0);
         checkBox.setDisable(true);
         chosenInputMethod = true;
-        System.out.println("--CheckBox deactivated");
     }
     
     
@@ -285,9 +286,10 @@ public class HinzufuegenController implements Initializable {
                 case 5: lblErklaerung.setText("Stundenkosten:"); break;
                 case 6: lblErklaerung.setText("Sitze:"); break;
                 case 7: lblErklaerung.setText("PS:"); break;
-                case 8: lblErklaerung.setText("Beenden"); 
+                case 8: lblErklaerung.setVisible(false);
                 weiterBtn.setText("Beenden");
-                txtInput.setDisable(true);break;
+                txtInput.setDisable(true);
+                txtInput.setVisible(false);break;
             }
         }
         else if(classToCreate == 1){
@@ -299,9 +301,10 @@ public class HinzufuegenController implements Initializable {
                 case 4: lblErklaerung.setText("In Reperatur?"); actCheck(); break;
                 case 5: lblErklaerung.setText("Stundenkosten:"); break;
                 case 6: lblErklaerung.setText("Laderaum in m^3:"); break;
-                case 7: lblErklaerung.setText("Beenden"); 
+                case 7:lblErklaerung.setVisible(false);
                 weiterBtn.setText("Beenden");
-                txtInput.setDisable(true);break;
+                txtInput.setDisable(true);
+                txtInput.setVisible(false);break;
             }
         }
         else if(classToCreate == 2){
@@ -313,9 +316,10 @@ public class HinzufuegenController implements Initializable {
                 case 4: lblErklaerung.setText("In Reperatur?"); actCheck(); break;
                 case 5: lblErklaerung.setText("Stundenkosten:"); break;
                 case 6: lblErklaerung.setText("Getoente Scheiben?"); actCheck(); break;
-                case 7: lblErklaerung.setText("Beenden");
+                case 7: lblErklaerung.setVisible(false);
                 weiterBtn.setText("Beenden");
-                txtInput.setDisable(true);break;
+                txtInput.setDisable(true);
+                txtInput.setVisible(false);break;
             }
         }
         else if(classToCreate == 3){
@@ -327,9 +331,10 @@ public class HinzufuegenController implements Initializable {
                 case 4: lblErklaerung.setText("In Reperatur?"); actCheck(); break;
                 case 5: lblErklaerung.setText("Stundenkosten:"); break;
                 case 6: lblErklaerung.setText("Beladungslimit in kg:"); break;
-                case 7: lblErklaerung.setText("Beenden");
+                case 7:lblErklaerung.setVisible(false);
                 weiterBtn.setText("Beenden");
-                txtInput.setDisable(true);break;
+                txtInput.setDisable(true);
+                txtInput.setVisible(false);break;
             }
         }
         else if(classToCreate == 4){
@@ -340,9 +345,11 @@ public class HinzufuegenController implements Initializable {
                 case 3: lblErklaerung.setText("Addresse:"); break;
                 case 4: lblErklaerung.setText("Geschäfts Tel.:"); break;
                 case 5: lblErklaerung.setText("Geschäfts Addr.:"); break;
-                case 6: lblErklaerung.setText("Beenden"); 
+                case 6:
+                    lblErklaerung.setVisible(false);
                 weiterBtn.setText("Beenden");
-                txtInput.setDisable(true);break;
+                txtInput.setDisable(true);
+                txtInput.setVisible(false);break;
             }
         }
         else if(classToCreate == 5){
@@ -352,9 +359,12 @@ public class HinzufuegenController implements Initializable {
                 case 2: lblErklaerung.setText("Tel. Nummer:"); break;
                 case 3: lblErklaerung.setText("Addresse:"); break;
                 case 4: lblErklaerung.setText("Notfall Kontakt:"); break;
-                case 5: lblErklaerung.setText("Beenden"); 
+                case 5: 
+                lblErklaerung.setVisible(false);
                 weiterBtn.setText("Beenden");
-                txtInput.setDisable(true);break;
+                txtInput.setDisable(true);
+                txtInput.setVisible(false);
+                        break;
             }
         }                                      
         

@@ -506,36 +506,44 @@ public class EditController implements Initializable {
                 if(index == 0){
                     txtItemEdit.clear();
                     txtItemEdit.setText(pkw.hersteller);
+                    lblInstructions.setText("Hersteller:");
                 }
                 else if(index == 1){
                     txtItemEdit.clear();
                     txtItemEdit.setText(pkw.model);
+                    lblInstructions.setText("Model:");
                 }
                 else if(index == 2){
                     txtItemEdit.clear();
                     txtItemEdit.setText(pkw.farbe);
+                    lblInstructions.setText("Farbe:");
                 }
                 else if(index == 3){
                     txtItemEdit.clear();
                     enableCheckBoxInput();
-                    checkBox.setSelected(pkw.inBenutzung);                
+                    checkBox.setSelected(pkw.inBenutzung); 
+                    lblInstructions.setText("Ist das Fahrzeug in Benutzung?");
                 }
                 else if(index == 4){
                     txtItemEdit.clear();
                     enableCheckBoxInput();
                     checkBox.setSelected(pkw.inReperatur);   
+                    lblInstructions.setText("Ist das Fahrzeug in Reperatur?");
                 }
                 else if(index == 5){
                     txtItemEdit.clear();
                     txtItemEdit.setText(Integer.toString(pkw.stundenKosten));
+                    lblInstructions.setText("Stundenkosten:");
                 }
                 else if(index == 6){
                     txtItemEdit.clear();
                     txtItemEdit.setText(Integer.toString(pkw.sitze));
+                    lblInstructions.setText("Sitze:");
                 }
                 else if(index == 7){
                     txtItemEdit.clear();
                     txtItemEdit.setText(Integer.toString(pkw.ps));
+                    lblInstructions.setText("PS:");
                 }
 
 
@@ -544,101 +552,121 @@ public class EditController implements Initializable {
                 if(index == 0){
                     txtItemEdit.clear();
                     txtItemEdit.setText(lkw.hersteller);
+                    lblInstructions.setText("Hersteller:");
                 }
                 else if(index == 1){
                     txtItemEdit.clear();
                     txtItemEdit.setText(lkw.model);
+                    lblInstructions.setText("Model:");
                 }
                 else if(index == 2){
                     txtItemEdit.clear();
                     txtItemEdit.setText(lkw.farbe);
+                    lblInstructions.setText("Farbe:");
                 }
                 else if(index == 3){
                     txtItemEdit.clear();
                     enableCheckBoxInput();
-                    checkBox.setSelected(lkw.inBenutzung);
+                    checkBox.setSelected(lkw.inBenutzung); 
+                    lblInstructions.setText("Ist das Fahrzeug in Benutzung?");
                 }
                 else if(index == 4){
                     txtItemEdit.clear();
                     enableCheckBoxInput();
-                    checkBox.setSelected(lkw.inReperatur); 
+                    checkBox.setSelected(lkw.inReperatur);   
+                    lblInstructions.setText("Ist das Fahrzeug in Reperatur?");
                 }
                 else if(index == 5){
                     txtItemEdit.clear();
                     txtItemEdit.setText(Integer.toString(lkw.stundenKosten));
+                    lblInstructions.setText("Stundenkosten:");
                 }
                 else if(index == 6){
                     txtItemEdit.clear();
                     txtItemEdit.setText(Integer.toString(lkw.ladeRaum));
+                    lblInstructions.setText("Laderaum:");
                 }
 
             }
             else if(van != null){
-
                 if(index == 0){
                     txtItemEdit.clear();
                     txtItemEdit.setText(van.hersteller);
+                    lblInstructions.setText("Hersteller:");
                 }
                 else if(index == 1){
                     txtItemEdit.clear();
                     txtItemEdit.setText(van.model);
+                    lblInstructions.setText("Model:");
                 }
                 else if(index == 2){
                     txtItemEdit.clear();
                     txtItemEdit.setText(van.farbe);
+                    lblInstructions.setText("Farbe:");
                 }
                 else if(index == 3){
+                    txtItemEdit.clear();
                     enableCheckBoxInput();
                     checkBox.setSelected(van.inBenutzung); 
+                    lblInstructions.setText("Ist das Fahrzeug in Benutzung?");
                 }
                 else if(index == 4){
                     txtItemEdit.clear();
                     enableCheckBoxInput();
-                    checkBox.setSelected(van.inReperatur); 
+                    checkBox.setSelected(van.inReperatur);   
+                    lblInstructions.setText("Ist das Fahrzeug in Reperatur?");
                 }
                 else if(index == 5){
                     txtItemEdit.clear();
                     txtItemEdit.setText(Integer.toString(van.stundenKosten));
+                    lblInstructions.setText("Stundenkosten:");
                 }
                 else if(index == 6){
                     txtItemEdit.clear();
                     enableCheckBoxInput();
                     checkBox.setSelected(van.getoenteScheiben); 
+                    lblInstructions.setText("Hat der Van getönte Scheiben?");
                 }
 
 
             }
             else if(anhaenger != null){
-
                 if(index == 0){
                     txtItemEdit.clear();
                     txtItemEdit.setText(anhaenger.hersteller);
+                    lblInstructions.setText("Hersteller:");
                 }
                 else if(index == 1){
                     txtItemEdit.clear();
                     txtItemEdit.setText(anhaenger.model);
+                    lblInstructions.setText("Model:");
                 }
                 else if(index == 2){
                     txtItemEdit.clear();
                     txtItemEdit.setText(anhaenger.farbe);
+                    lblInstructions.setText("Farbe:");
                 }
                 else if(index == 3){
                     txtItemEdit.clear();
                     enableCheckBoxInput();
                     checkBox.setSelected(anhaenger.inBenutzung); 
+                    lblInstructions.setText("Ist das Fahrzeug in Benutzung?");
                 }
                 else if(index == 4){
                     txtItemEdit.clear();
                     enableCheckBoxInput();
-                    checkBox.setSelected(anhaenger.inReperatur); 
+                    checkBox.setSelected(anhaenger.inReperatur);   
+                    lblInstructions.setText("Ist das Fahrzeug in Reperatur?");
                 }
                 else if(index == 5){
                     txtItemEdit.clear();
                     txtItemEdit.setText(Integer.toString(anhaenger.stundenKosten));
+                    lblInstructions.setText("Stundenkosten:");
                 }
                 else if(index == 6){
                     txtItemEdit.clear();
                     txtItemEdit.setText(Integer.toString(anhaenger.beladungsLimit));
+                    lblInstructions.setText("Beladungslimit:");
                 }
 
             }
@@ -648,22 +676,27 @@ public class EditController implements Initializable {
                 if(index == 0){
                     txtItemEdit.clear();
                     txtItemEdit.setText(privKunde.vorname);
+                    lblInstructions.setText("Vorname:");
                 }
                 else if(index == 1){
                     txtItemEdit.clear();
                     txtItemEdit.setText(privKunde.nachname);
+                    lblInstructions.setText("Nachname:");
                 }
                 else if(index == 2){
                     txtItemEdit.clear();
                     txtItemEdit.setText(privKunde.telefonNummer);
+                    lblInstructions.setText("Telefonnummer:");
                 }
                 else if(index == 3){
                     txtItemEdit.clear();
                     txtItemEdit.setText(privKunde.addresse);
+                    lblInstructions.setText("Addresse:");
                 }
                 else if(index == 4){
                     txtItemEdit.clear();
                     txtItemEdit.setText(privKunde.notfallTelefon);
+                    lblInstructions.setText("Notfall Kontakt:");
                 }
 
 
@@ -674,26 +707,32 @@ public class EditController implements Initializable {
                 if(index == 0){
                     txtItemEdit.clear();
                     txtItemEdit.setText(geschKunde.vorname);
+                    lblInstructions.setText("Vorname:");
                 }
                 else if(index == 1){
                     txtItemEdit.clear();
                     txtItemEdit.setText(geschKunde.nachname);
+                    lblInstructions.setText("Nachname:");
                 }
                 else if(index == 2){
                     txtItemEdit.clear();
                     txtItemEdit.setText(geschKunde.telefonNummer);
+                    lblInstructions.setText("Telefonnummer:");
                 }
                 else if(index == 3){
                     txtItemEdit.clear();
                     txtItemEdit.setText(geschKunde.addresse);
+                    lblInstructions.setText("Addresse:");
                 }
                 else if(index == 4){
                     txtItemEdit.clear();
                     txtItemEdit.setText(geschKunde.arbeitsAdresse);
+                    lblInstructions.setText("Arbeitsaddresse:");
                 }
                  else if(index == 5){
                     txtItemEdit.clear();
                     txtItemEdit.setText(geschKunde.arbeitsTelefon);
+                    lblInstructions.setText("Arbeitstelefon:");
                 }
 
 
@@ -701,14 +740,17 @@ public class EditController implements Initializable {
             else if(!(miete == null)){
                 switch(index){
                     case 0: 
+                        lblInstructions.setText("Startdatum der Miete:");
                         txtItemEdit.clear(); 
                         enableDateTimePick();
                         break;
                     case 1: 
+                        lblInstructions.setText("Enddatum der Miete:");
                         txtItemEdit.clear();
                         enableDateTimePick();
                         break;
                     case 2: 
+                        lblInstructions.setText("Wählen Sie ein Fahrzeug aus:");
                         enableTextInput();
                         lsItems.getItems().clear();
                         mieteEditChoice = "Fahrzeug";
@@ -720,6 +762,7 @@ public class EditController implements Initializable {
                         inMieteChangeMode = true;
                         break;
                     case 3: 
+                        lblInstructions.setText("Wählen Sie einen Kunden aus:");
                         enableTextInput();
                         lsItems.getItems().clear();
                         mieteEditChoice = "Kunde";
@@ -730,9 +773,11 @@ public class EditController implements Initializable {
                         inMieteChangeMode = true;
                         break;
                     case 4: 
+                        lblInstructions.setText("Dies ist nicht änderbar!");
                         System.out.println("nicht änderbar");
                         break;
                     case 5: 
+                        lblInstructions.setText("Dies ist nicht änderbar!");
                         System.out.println("nicht änderbar");
                         break;
                 }
@@ -742,16 +787,8 @@ public class EditController implements Initializable {
             }
         }
     }
-    /*
-    private GeschaeftskundeModel geschKunde;
-    private PrivatkundeModel privKunde;
     
-    private PkwModel pkw;
-    private LkwModel lkw;
-    private VanModel van;
-    private AnhaengerModel anhaenger;
-    private mietenModel miete;
-    */
+    
     private boolean checkForInt(){
         boolean isInt = true;
         if("".equals(txtItemEdit.getText())) {}

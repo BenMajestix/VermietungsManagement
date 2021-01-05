@@ -54,8 +54,8 @@ public class mietenModel {
         String start = getStartDate().format(format);
         String ende = getEndDate().format(format);
         
-        allVar.add("Start Datum: " + start);
-        allVar.add("End Datum: " + ende);
+        allVar.add("Startdatum: " + start);
+        allVar.add("Enddatum: " + ende);
         allVar.add(getFahrzeug().hersteller + " " + getFahrzeug().model);
         allVar.add(getKunde().vorname + " " + getKunde().nachname);
         allVar.add("Zeitraum: " + zeitraum + "h");
