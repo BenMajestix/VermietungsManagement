@@ -43,15 +43,7 @@ public class HinzufuegenController implements Initializable {
     //An welcher Stelle des Erstellvorgangs der Benutzer gerade ist
     private int indexForInput;
     
-    //Alle Inputs, welche am Ende zu einem Objekt erstellt werden
-    private String value0Input;
-    private String value1Input;
-    private String value2Input;
-    private String value3Input;
-    private String value4Input;
-    private String value5Input;
-    private String value6Input;
-    private String value7Input;
+    String[] inputValue;
     
     //Welches Objekt, also von welcher Klasse, es erstellt werden soll
     private int classToCreate;
@@ -67,137 +59,164 @@ public class HinzufuegenController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        choiceErstellen.getItems().add("PKW");
-        choiceErstellen.getItems().add("LKW");
-        choiceErstellen.getItems().add("Van");
-        choiceErstellen.getItems().add("Anhaenger");
-        choiceErstellen.getItems().add("Geschäftskunde");
-        choiceErstellen.getItems().add("Privatkunde");
-        System.out.println("--Choices Erstellt");
+        
+        if(App.isHinzuDirFromMiete() == 1){
+            choiceErstellen.getItems().add("PKW");
+            choiceErstellen.getItems().add("LKW");
+            choiceErstellen.getItems().add("Van");
+            choiceErstellen.getItems().add("Anhaenger");
+            System.out.println("--Choices Erstellt Fahrzeuge"); 
+        }
+        else if(App.isHinzuDirFromMiete() == 2){
+            choiceErstellen.getItems().add("Geschäftskunde");
+            choiceErstellen.getItems().add("Privatkunde");
+            System.out.println("--Choices Erstellt Kunden"); 
+        }
+        else{
+            choiceErstellen.getItems().add("PKW");
+            choiceErstellen.getItems().add("LKW");
+            choiceErstellen.getItems().add("Van");
+            choiceErstellen.getItems().add("Anhaenger");
+            choiceErstellen.getItems().add("Geschäftskunde");
+            choiceErstellen.getItems().add("Privatkunde");
+            System.out.println("--Choices Erstellt"); 
+        }
+        
+        
+        
+        //die Btns und textFelder werden disabled, damit es zu keinen Fehlern kommen kann.
         weiterBtn.setDisable(true);
         txtInput.setDisable(true);
         
+        //Der Index wird hier initialisiert gesetzt um eine nullPointerException zu vermeiden
         indexForInput = 0;
         
+        //Die Checkbox wird deaktiviert, da es immer zuerst TextInput gibt.
         deactCheck();
+        
+        //Die checkBox wird unentschlossen gesetzt, damit man erkennen kann ob der User eine Input gemacht hat.
         checkBox.setIndeterminate(true);
         
+        //Es steht von sich aus Label dort, das wollen wir nicht haben.
         lblInstructions.setText(" ");
+        
+        //Hier wird das String Array initialisiert mit einer länge von 7, da es nicht mehr Strings halten muss
+        inputValue = new String[7];
     }    
     
     
     
-    
+    //Der Button um das eingegebene zu bestätigen und zur nächsten Variable
     @FXML
     private void btnWeiter(ActionEvent event) throws IOException {
         boolean inputEmpty = false;
+        
+        //Wenn es gerade einen TextInput gibt, wird gecheckt ob das TextFeld leer ist. Dies wird dann gespeichert.
         if(chosenInputMethod){
-            if("".equals(txtInput.getText().strip())){
-                inputEmpty = true;
-            }
-            else{inputEmpty = false;}
+            inputEmpty = "".equals(txtInput.getText().strip());
         }
+        //Falls es gerade einen CheckBox Input gibt, wird geschaut ob die Checkbpx noch auf isIndeterminate ist, also es noch keinen Input gab
         else if(!(chosenInputMethod)){
-            if(checkBox.isIndeterminate()){
-                inputEmpty = true;
-            }
-            else{inputEmpty = false;}
+            inputEmpty = checkBox.isIndeterminate();
         }
         
         
+        //switch, an welchem punkt der erstellung der nutzer ist.        
         if(indexForInput == 0){
             if(inputEmpty){lblErklaerung.setText("Bitte machen Sie eine Eingabe.");}
             //else if(checkForInt())
             else{
-            value0Input = txtInput.getText();
-            txtInput.clear();
-            indexForInput ++;
-            changePrompt();
-            addToListView(value0Input);}
+                //Der Input wird als String in dem entsprechendem String gespeichert
+                inputValue[0] = txtInput.getText();
+                txtInput.clear();
+                indexForInput ++;
+                changePrompt();
+                //Der Input wird dann noch in der ListView gespeichert.
+                addToListView(inputValue[0]);}
         }
         else if(indexForInput == 1){
             if(inputEmpty){lblErklaerung.setText("Bitte machen Sie eine Eingabe.");}
             else{
-            value1Input = txtInput.getText();
-            txtInput.clear();
-            indexForInput ++;
-            changePrompt();
-            addToListView(value1Input);}
+                inputValue[1] = txtInput.getText();
+                txtInput.clear();
+                indexForInput ++;
+                changePrompt();
+                addToListView(inputValue[1]);}
         }
         else if(indexForInput == 2){
             if(inputEmpty){lblErklaerung.setText("Bitte machen Sie eine Eingabe.");}
             else{
-            value2Input = txtInput.getText();
-            txtInput.clear();
-            indexForInput ++;
-            changePrompt();
-            addToListView(value2Input);}
+                inputValue[2] = txtInput.getText();
+                txtInput.clear();
+                indexForInput ++;
+                changePrompt();
+                addToListView(inputValue[2]);}
         }
         else if(indexForInput == 3){
             if(inputEmpty){lblErklaerung.setText("Bitte machen Sie eine Eingabe.");}
             else{
             if(txtInput.isDisabled()){
-            value3Input = Boolean.toString(checkBox.isSelected());
-            checkBox.setIndeterminate(true);}
-            else{value3Input = txtInput.getText();
-            txtInput.clear();}
-            indexForInput ++;
-            changePrompt();
-            addToListView(value3Input);}
+                inputValue[3] = Boolean.toString(checkBox.isSelected());
+                checkBox.setIndeterminate(true);}
+            else{inputValue[3] = txtInput.getText();
+                txtInput.clear();}
+                indexForInput ++;
+                changePrompt();
+                addToListView(inputValue[3]);}
         }
         else if(indexForInput == 4){
             if(inputEmpty){lblErklaerung.setText("Bitte machen Sie eine Eingabe.");}
             else{
             if(txtInput.isDisabled()){
-            value4Input = Boolean.toString(checkBox.isSelected());
-            checkBox.setIndeterminate(true);}
-            else{value4Input = txtInput.getText();
-            txtInput.clear();}
-            indexForInput ++;
-            changePrompt();
-            addToListView(value4Input);}
+                inputValue[4] = Boolean.toString(checkBox.isSelected());
+                checkBox.setIndeterminate(true);}
+            else{inputValue[4] = txtInput.getText();
+                txtInput.clear();}
+                indexForInput ++;
+                changePrompt();
+                addToListView(inputValue[4]);}
         }
         else if(indexForInput == 5){
             if(classToCreate == 5){beenden();}else{
             if(inputEmpty){lblErklaerung.setText("Bitte machen Sie eine Eingabe.");}
             else{
-            value5Input = txtInput.getText();
-            txtInput.clear();}
-            indexForInput ++;
-            changePrompt();
-            addToListView(value5Input);}
+                inputValue[5] = txtInput.getText();
+                txtInput.clear();}
+                indexForInput ++;
+                changePrompt();
+                addToListView(inputValue[5]);}
         }
         else if(indexForInput == 6){
             if(classToCreate == 4){beenden();}else{
                 if(inputEmpty){lblErklaerung.setText("Bitte machen Sie eine Eingabe.");}
                 else{
                 if(txtInput.isDisabled()){
-                    value6Input = Boolean.toString(checkBox.isSelected());
-                checkBox.setIndeterminate(true);}
+                    inputValue[6] = Boolean.toString(checkBox.isSelected());
+                    checkBox.setIndeterminate(true);}
                 else{
-                    value6Input = txtInput.getText();
+                    inputValue[6] = txtInput.getText();
                     txtInput.clear();
             }   }
             indexForInput ++;
             changePrompt();
-            addToListView(value6Input);}
+            addToListView(inputValue[6]);}
         }
         else if(indexForInput == 7){
             if(classToCreate == 1 || classToCreate == 2 || classToCreate == 3){beenden();}else{
             if(inputEmpty){lblErklaerung.setText("Bitte machen Sie eine Eingabe.");}
             else{
-            value7Input = txtInput.getText();
+            inputValue[7] = txtInput.getText();
             txtInput.clear();}
             indexForInput ++;
             changePrompt();
-            addToListView(value7Input);}
+            addToListView(inputValue[7]);}
         }
         else{
             beenden();
         }
     }
 
-    
+    //Eine helfer Funktion um das hinzufügen in die listView einfacher zu machen
     public void addToListView(String input){
         lvNeuesObjekt.getItems().add(input);
     }
@@ -209,51 +228,47 @@ public class HinzufuegenController implements Initializable {
         App.setRoot("homeView");
     }
 
+    //Wird ausgeführt wenn der User auf den Beenden btn klickt
     public void beenden() throws IOException{
+        //Je nachdem welche Klasse ausgewählt ist, wird das jeweilige Objekt erstellt und der App ArrayList hinzugefügt
         if(classToCreate == 0){
-            PkwModel p = new PkwModel(Integer.parseInt(value6Input), Integer.parseInt(value7Input), value0Input, value1Input, value2Input, true, Boolean.valueOf(value3Input), Boolean.valueOf(value4Input), Integer.parseInt(value5Input),  App.getFahrzeuge().size() + 1);
+            PkwModel p = new PkwModel(Integer.parseInt(inputValue[6]), Integer.parseInt(inputValue[7]), inputValue[0], inputValue[1], inputValue[2], true, Boolean.valueOf(inputValue[3]), Boolean.valueOf(inputValue[4]), Integer.parseInt(inputValue[5]),  App.getFahrzeuge().size() + 1);
             App.getFahrzeuge().add(p);
         }
         else if(classToCreate == 1){
-            LkwModel p = new LkwModel(Integer.parseInt(value6Input), value0Input, value1Input, value2Input, true, Boolean.valueOf(value3Input), Boolean.valueOf(value4Input), Integer.parseInt(value5Input),  App.getFahrzeuge().size() + 1);
+            LkwModel p = new LkwModel(Integer.parseInt(inputValue[6]), inputValue[0], inputValue[1], inputValue[2], true, Boolean.valueOf(inputValue[3]), Boolean.valueOf(inputValue[4]), Integer.parseInt(inputValue[5]),  App.getFahrzeuge().size() + 1);
             App.getFahrzeuge().add(p);
         }
         else if(classToCreate == 2){
-            VanModel p = new VanModel(Boolean.valueOf(value6Input), value0Input, value1Input, value2Input, true, Boolean.valueOf(value3Input), Boolean.valueOf(value4Input), Integer.parseInt(value5Input),  App.getFahrzeuge().size() + 1);
+            VanModel p = new VanModel(Boolean.valueOf(inputValue[6]), inputValue[0], inputValue[1], inputValue[2], true, Boolean.valueOf(inputValue[3]), Boolean.valueOf(inputValue[4]), Integer.parseInt(inputValue[5]),  App.getFahrzeuge().size() + 1);
             App.getFahrzeuge().add(p);
         }
         else if(classToCreate == 3){
-            AnhaengerModel p = new AnhaengerModel(Integer.parseInt(value6Input), value0Input, value1Input, value2Input, true, Boolean.valueOf(value3Input), Boolean.valueOf(value4Input), Integer.parseInt(value5Input),  App.getFahrzeuge().size() + 1);
+            AnhaengerModel p = new AnhaengerModel(Integer.parseInt(inputValue[6]), inputValue[0], inputValue[1], inputValue[2], true, Boolean.valueOf(inputValue[3]), Boolean.valueOf(inputValue[4]), Integer.parseInt(inputValue[5]),  App.getFahrzeuge().size() + 1);
             App.getFahrzeuge().add(p);
         }
         else if(classToCreate == 4){
-            GeschaeftskundeModel g = new GeschaeftskundeModel(value5Input, value4Input, value0Input, value1Input, App.getKunden().size() + 1, value2Input, value3Input);
+            GeschaeftskundeModel g = new GeschaeftskundeModel(inputValue[5], inputValue[4], inputValue[0], inputValue[1], App.getKunden().size() + 1, inputValue[2], inputValue[3]);
             App.getKunden().add(g);
         }
         else if(classToCreate == 5){
-            PrivatkundeModel g = new PrivatkundeModel(value4Input, value0Input, value1Input, App.getKunden().size() + 1, value2Input, value3Input);
+            PrivatkundeModel g = new PrivatkundeModel(inputValue[4], inputValue[0], inputValue[1], App.getKunden().size() + 1, inputValue[2], inputValue[3]);
             App.getKunden().add(g);
         }
-        value0Input = null;
-        value1Input = null;
-        value2Input = null;
-        value3Input = null;
-        value4Input = null;
-        value5Input = null;
-        value6Input = null;
-        value7Input = null;
         System.out.println("--Objekt erstellt");
         System.out.println(App.getKunden().get(App.getKunden().size()-1).nachname);
         System.out.println(App.getFahrzeuge().get(App.getFahrzeuge().size()-1).farbe);
         
-        if(App.isHinzuDirFromMiete()){
+        //Falls der User aus mietenView hergeleitet wurde, werden Sie auch dorthin zurückgeschickt
+        if(App.isHinzuDirFromMiete() == 1 || App.isHinzuDirFromMiete() == 2){
             App.setRoot("mietenView");
         }
         else{
+            //Falls nicht, dann nach Hause
         App.setRoot("homeView");}
         
     }
-    
+    //Activates CheckBox
     public void actCheck(){
         txtInput.setOpacity(0);
         txtInput.setDisable(true);
@@ -263,6 +278,7 @@ public class HinzufuegenController implements Initializable {
         chosenInputMethod = false;
         
     }
+    //Deactivates CheckBox
     public void deactCheck(){
         txtInput.setOpacity(100);
         txtInput.setDisable(false);
@@ -272,7 +288,7 @@ public class HinzufuegenController implements Initializable {
     }
     
     
-    
+    //Ändert den Text des Labels anhand der zu erstellenden Klasse und dem Fortschritt in der Erstellung des Objekts
     public void changePrompt(){
         lblInstructions.setText("");
         deactCheck();
@@ -370,12 +386,14 @@ public class HinzufuegenController implements Initializable {
         
     }
     
+    //Falls der String ein Integer ist, wird true wiedergegeben, also checkt er ob ein String in einen Int umgewandelt werden kann.
     private boolean checkForInt(){
         boolean isInt = true;
         if("".equals(txtInput.getText())) {}
         else{
             if(classToCreate == 0){
                 if(indexForInput == 5 || indexForInput == 6 || indexForInput == 7){
+                    //Er versucht einen Integer aus einem String zu machen, falls das nicht klappt wird false returned
                     try{
                         int i = Integer.parseInt(txtInput.getText().strip());
                     }
@@ -416,9 +434,13 @@ public class HinzufuegenController implements Initializable {
         return isInt;
     }
     
+    //Wird aufgerufen, wenn es einen KeyBoard Input gab.
     public void checkIntegerInput(){
         if(!(checkForInt())){
+            //Wenn der Input kein Integer war, gibt es eine Warnung
             lblErklaerung.setText("Es dürfen nur Zahlen eingegeben werden.");
+            //Das nicht passende zeichen wird entfernt und der Caret wird am ende des Textes platziert
+            //Der Caret ist das ding was einem anzeigt wo im text man sich befinded
             String edit = txtInput.getText().substring(0, txtInput.getText().length()-1);
             txtInput.setText(edit);
             txtInput.positionCaret(txtInput.getText().length());
@@ -426,7 +448,10 @@ public class HinzufuegenController implements Initializable {
         else{changePrompt();}
     }
     
-   
+    
+    
+    
+    //Es wird ermittelt, welches Objekt erstellt werden soll und die entsprechend Variablen werden gesetzt um es später zu identifizieren
     @FXML
     private void btnAnwenden(ActionEvent event) {
         switch(choiceErstellen.getValue()){

@@ -36,13 +36,13 @@ public class mietenModel {
     }
     
     
-    
+    //Es wird der Zeitruam zwischen dem Start und Enddatum ausgerechnet
     public void calcZeitraum(){
         Duration duration = Duration.between(startDate, endDate);
         zeitraum = (int) duration.toHours();
         calcKosten();
     }
-    
+    //Und die Kosten auch gleich erneuert
     public void calcKosten(){
         kosten = zeitraum * fahrzeug.stundenKosten;
     }

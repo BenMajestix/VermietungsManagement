@@ -29,7 +29,8 @@ public abstract class KundenModel {
         
         
     }
-
+    
+    //Eine Methode, welche alle Variablen nacheinander ausgibt, macht es einfach die ListViews zu befüllen.
     public ArrayList returnAllVar(){
         ArrayList<String> allVar = new ArrayList();
         
@@ -42,13 +43,14 @@ public abstract class KundenModel {
         
         return allVar;
     }
+    //Hier werden alle Variablen zurückgegeben, welche der Benutzer verändern darf
     public ArrayList returnAllVarEdit(){
         ArrayList<String> allVar = new ArrayList();
         
-        allVar.add(getVorname());
-        allVar.add(getNachname());
-        allVar.add(getTelefonNummer());
-        allVar.add(getAddresse());
+        allVar.add("Vorname: " + getVorname());
+        allVar.add("Nachname: "+getNachname());
+        allVar.add("Telefonnummer: "+getTelefonNummer());
+        allVar.add("Addresse: "+getAddresse());
         
         return allVar;
     }

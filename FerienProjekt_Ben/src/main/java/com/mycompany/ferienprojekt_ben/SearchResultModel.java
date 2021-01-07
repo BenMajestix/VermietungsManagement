@@ -14,6 +14,8 @@ public class SearchResultModel {
     int searchScore;
     int superClass;
 
+    //Ein Model für ein Ergebnis aus der Suche, diese werden anhand ihres searchScores geordnet nach Relevanz
+    //Und dann in der ListView angezeigt
     public SearchResultModel(String output, int searchScore, int superClass) {
         this.output = output;
         this.searchScore = searchScore;

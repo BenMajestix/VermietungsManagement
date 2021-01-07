@@ -39,7 +39,8 @@ public class App extends Application {
     
     //Ob der Benutzer von der MietenView zur HinzufuegenView umgeleitet wurde
     //Wird auch benutzt, damit man aus der HinzuView auch zurück zur MietenView geleitet wird
-    private static boolean hinzuDirFromMiete;
+    //Wenn 0, dann nicht aus der MietenView directed, 1 directed um Fahrzeuge zuerstellen, wenn 2 dann um Kunden zu erstellen
+    private static int hinzuDirFromMiete;
     
     
     @Override
@@ -71,9 +72,14 @@ public class App extends Application {
         mietenErstellen();
         System.out.println("--Mieten Erstellt");
         
+        //Die internal Clock wird auf das aktuelle Datum und die entsprechende Zeit gesetzt
         currDateTime = LocalDateTime.now();
         System.out.println("--Aktuelles Datum gesetzt");
         System.out.println(currDateTime);
+        
+        //Es wird gecheckt welche Fahrzeuge in Mieten sind, welche Mieten aktiv sind
+        checkMietenFahrzeuge();
+        
         System.out.println(" ");
         System.out.println("--Launch");
         System.out.println(" ");
@@ -122,6 +128,35 @@ public class App extends Application {
         
         mieten.add(m2);
     }
+    
+    //Checkt welche Fahrzeuge erhaeltlich sind
+    public static void checkMietenFahrzeuge(){
+        for(mietenModel m : App.getMieten()){
+            if(m.getEndDate().isBefore(App.getCurrDateTime())){
+                m.setAbgelaufen(true);
+                //Diese Schleife sucht sich das Objekt, welches in der Miete benutzt wird und setzt den Benutzt status auf false,
+                //da nach ablauf der Miete das Fahrzeug wieder erhältlich ist
+                for(int i = 0; i <= App.getFahrzeuge().size()-1; i++){
+                    if(App.getFahrzeuge().get(i).equals(m.getFahrzeug())){
+                        App.getFahrzeuge().get(i).setInBenutzung(false);
+                        App.getFahrzeuge().get(i).updateErhealtlich();
+                    }
+                }
+                }
+            else if(m.getEndDate().isAfter(App.getCurrDateTime())){
+                m.setAbgelaufen(false);
+                //Diese Schleife sucht sich das Objekt, welches in der Miete benutzt wird und setzt den Benutzt status auf true,
+                //da nach beginn der Miete das Fahrzeug nicht mehr erhältlich ist
+                for(int i = 0; i <= App.getFahrzeuge().size()-1; i++){
+                    if(App.getFahrzeuge().get(i).equals(m.getFahrzeug())){
+                        App.getFahrzeuge().get(i).setInBenutzung(true);
+                        App.getFahrzeuge().get(i).updateErhealtlich();
+                    }
+                }
+            }
+        }
+    }
+    
     
     public static ArrayList<mietenModel> getMieten() {
         return mieten;
@@ -203,11 +238,11 @@ public class App extends Application {
         App.cacheMieteEndTime = cacheMieteEndTime;
     }
 
-    public static boolean isHinzuDirFromMiete() {
+    public static int isHinzuDirFromMiete() {
         return hinzuDirFromMiete;
     }
 
-    public static void setHinzuDirFromMiete(boolean hinzuDirFromMiete) {
+    public static void setHinzuDirFromMiete(int hinzuDirFromMiete) {
         App.hinzuDirFromMiete = hinzuDirFromMiete;
     }
 

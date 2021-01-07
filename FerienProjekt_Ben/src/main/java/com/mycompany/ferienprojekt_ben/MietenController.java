@@ -10,7 +10,6 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.Month;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -48,20 +47,29 @@ public class MietenController implements Initializable {
     private ChoiceBox<String> timePickStart;
     @FXML
     private ChoiceBox<String> timePickEnd;
+    @FXML
+    private Button erstellenBtn;
     
+    //Ob in der ListView die Kunden oder die fahrzeuge angezeigt werden
     int listChoice;
-    
+    //Die Startzeiten und Endzeiten der Miete, wird später zu LocalDateTime zusammengefasst
     LocalTime startTime = null;
     LocalTime endTime = null;   
-    LocalDateTime chosenStartDateTime;
-    LocalDateTime chosenEndDateTime;
+    //Die Startdaten und Enddaten der Miete, wird später zu LocalDateTime zusammengefasst
     LocalDate startDate;
     LocalDate endDate;
+    //Der Start und das Ende der Miete, mit Zeit und Datum
+    LocalDateTime chosenStartDateTime;
+    LocalDateTime chosenEndDateTime;
     
+    //Das ausgewählte Fahrzeug/Kunde für die Miete
     FahrzeugModel chosenFahrzeug;
     KundenModel chosenKunde;
     @FXML
-    private Button erstellenBtn;
+    private Label lblWarning;
+    @FXML
+    private Label lblDate;
+    
     
     
     
@@ -73,12 +81,14 @@ public class MietenController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        //Die Optionen werden in die ChoiceBoxes gesetzt
         fillChoiceBox();
+        //Falls etwas zwischengespeichert wurde, wird es wieder hergestellt
         restore();
     }    
 
     
-    
+    //Die Optionen werden in die ChoiceBoxes gesetzt
     public void fillChoiceBox(){
         timePickStart.getItems().add("01:00");
         timePickStart.getItems().add("02:00");
@@ -133,39 +143,50 @@ public class MietenController implements Initializable {
     
     @FXML
     private void btnHome(ActionEvent event) throws IOException {
+        //Speichert die Choices des Nutzers zwischen und geht zurück zum homeview
         storeInCache();
         App.setRoot("homeView");
     }
-
+    //Wenn das TextFeld für die Fahrzeuge gecklickt wird
     @FXML
     private void txtFahrClicked(MouseEvent event) {
+        //Dann werden alle verfügbaren Fahrzeuge in der Listview gezeigt damit der User die Auswählen kann
         fillListView("fahrzeug");
         listChoice = 1;
     }
-
+    //Wenn das TextFeld für die Kunden gecklickt wird
     @FXML
     private void txtKundClicked(MouseEvent event) {
+        //Dann werden alle kunden in der Listview gezeigt damit der User die Auswählen kann
         fillListView("kunde");
         listChoice = 2;
     }
 
+    
     @FXML
     private void btnNewKunde(ActionEvent event) throws IOException {
+        //Es werden die jetzigen choices gespeichert 
         storeInCache();
-        App.setHinzuDirFromMiete(true);
+        //Es wird spezifiziert dass der user aus der mietenview kam und ein kunden erstellen will
+        App.setHinzuDirFromMiete(2);
         App.setRoot("hinzufuegenView");
         
     }
 
     @FXML
     private void btnNewFahrz(ActionEvent event) throws IOException {
+        //Es werden die jetzigen choices gespeichert 
         storeInCache();
-        App.setHinzuDirFromMiete(true);
+        //Es wird spezifiziert dass der user aus der mietenview kam un ein Fahrzeug erstellen will
+        App.setHinzuDirFromMiete(1);
         App.setRoot("hinzufuegenView");
+        
     }
 
-    
+    //Es werden alle user choices in App zwischengespeichert
+    //Das ist schön für den User, denn wenn er einen neuen Kunden oder Fahrzeug erstellen möchte, muss er nicht wieder alles neu eingeben
     public void storeInCache(){
+        //wenn eine Value nicht null ist, wird sie gespeichert
         if(!(timePickStart.getValue() == null)){
             createLocalTimeStart();
             App.setCacheMieteStartTime(startTime);
@@ -189,8 +210,10 @@ public class MietenController implements Initializable {
             App.setCacheMieteKunde(chosenKunde);
         }
     }
-    
+    //Hier werden alle gespeicherten Values wiederhergestellt und in die Felder gesetzt
     public void restore(){
+        
+        //Wenn eine Value in App nicht null ist, dann wird diese Value wiederhergestellt
         if(!(App.getCacheMieteStartTime() == null)){
             startTime = App.getCacheMieteStartTime();
             switch(startTime.getHour()){
@@ -271,6 +294,7 @@ public class MietenController implements Initializable {
         nullCache();
     }
     
+    //Wenn eine Miete erstellt wird, wird der Zwischenspeicher komplett gelöscht
     public void nullCache(){
         App.setCacheMieteStartTime(null);
         App.setCacheMieteEndTime(null);
@@ -280,23 +304,27 @@ public class MietenController implements Initializable {
         App.setCacheMieteKunde(null);
     }
     
+    //Die ListView wird mit den Fahrzeugen oder Kunden gefüllt 
     public void fillListView(String choice){
         lsMieten.getItems().clear();
+        //Wenn die Fahrzeuge gewählt sind, dann werden alle erhealtlichen Fahrzeuge zur auswahl gestellt
         if("fahrzeug".equals(choice)){
             for(FahrzeugModel f : App.getFahrzeuge()){
                 if(f.isErhealtlich() == true){
                 lsMieten.getItems().add(f.hersteller + " " + f.model + " " + f.farbe + " Typ: " + f.typ);}
             }
         }
+        //Wenn die Kunden gewählt sind, dann werden alle kunden zur auswahl gestellt
         else if("kunde".equals(choice)){
             for(KundenModel k : App.getKunden()){
                 lsMieten.getItems().add(k.vorname + " " + k.nachname + " " + k.telefonNummer + " " + k.kundenTyp);
             }
         }
     }
-    
+    //Es wird mit der auswahl in der ChoiceBox ein LocalTime erstellt um später ein LocalDateTime zu erstellen
     public void createLocalTimeStart(){
         LocalTime start = null;
+        //Da man nicht direkt mit der Value ein LocalTime erstellen kann, muss ich ein Switch machen 
         switch(timePickStart.getValue()){
             case "01:00" : start = LocalTime.of(1, 0, 0, 0);break;
             case "02:00" : start = LocalTime.of(2, 0, 0, 0);break;
@@ -359,14 +387,14 @@ public class MietenController implements Initializable {
         endTime = end;
     }
     
-    
+    //Hier wird die LocalDate anhand des DatePickers erstellt
     public void createDateTime(){
         try{
             startDate = datePickStart.getValue();}
-        catch(Exception e){}
+        catch(Exception e){System.out.println("err");}
         try{
             endDate = datePickEnd.getValue();}
-        catch(Exception e){}
+        catch(Exception e){System.out.println("err");}
         
         createLocalTimeStart();
         createLocalTimeEnd();
@@ -381,27 +409,44 @@ public class MietenController implements Initializable {
     
     @FXML
     private void btnErstellen(ActionEvent event) throws IOException {
-        LocalDate s;
-        LocalDate e;
-        s = datePickStart.getValue();
-        e = datePickEnd.getValue();
-        if(e.isBefore(s)){
-            erstellenBtn.setText("Das EndDatum muss vor dem StartDatum sein!");
+        //Es müssen alle Felder ausgefüllt sein, damit es zu keinen Fehlern kommen kann
+        if(datePickStart.getValue() != null && datePickEnd.getValue() != null && timePickEnd.getValue() != null && timePickStart.getValue() != null && !"".equals(txtFahrzeug.getText().strip()) && !"".equals(txtKunde.getText().strip())){
+            //Es werden die LocalDates erstellt und dann werden dates gesetzt mit der user Choice
+            LocalDate s;
+            LocalDate e;
+            s = datePickStart.getValue();
+            e = datePickEnd.getValue();
+            createDateTime();
+            //Falls das Start nach dem EndDatum ist wird es einen Fehler geben
+            if(chosenEndDateTime.isBefore(chosenStartDateTime)){
+                erstellenBtn.setText("Das EndDatum muss nach dem StartDatum sein!");
+            }
+            else{
+                //Das gewählte Fahrzeug wird benutzt gesetzt.
+                chosenFahrzeug.setInBenutzung(true);
+                //Die Miete wird erstellt und die MietenNummer wird gesetzt
+                mietenModel newMiete = new mietenModel(chosenStartDateTime, chosenEndDateTime, chosenFahrzeug, chosenKunde);
+                //Die nummer ist nur der Index des Objektes in der ArrList
+                newMiete.setMietenNummer(App.getMieten().size()+1);
+                //Die Miete wird Hinzugefügt
+                App.getMieten().add(newMiete);
+                //Updated welche Fahzeuge noch erhaeltlich sind
+                App.checkMietenFahrzeuge();
+                System.out.println(App.getMieten().get(App.getMieten().size() -1));
+                App.setRoot("homeView");
+                nullCache();
+            }
         }
         else{
-        createDateTime();
-        mietenModel newMiete = new mietenModel(chosenStartDateTime, chosenEndDateTime, chosenFahrzeug, chosenKunde);
-        newMiete.setMietenNummer(App.getMieten().size()+1);
-        App.getMieten().add(newMiete);
-        System.out.println(App.getMieten().get(App.getMieten().size() -1));
-        App.setRoot("homeView");
-        nullCache();}
+            erstellenBtn.setText("Alle Felder müssen ausgefüllt sein!");
+        }
     }
 
+    //Der Index des gewählten Objektes in der ListView wird gespeichert
     @FXML
     private void getListIndex(MouseEvent event) {
         int index = lsMieten.getFocusModel().getFocusedIndex();
-        
+        //Dann wird das gewählte Objekt anhand des Index's aus der ArrList genommen und gespeichert
         if(listChoice == 1){
             chosenFahrzeug = App.getFahrzeuge().get(index);
             txtFahrzeug.setText(chosenFahrzeug.hersteller + " " + chosenFahrzeug.model);

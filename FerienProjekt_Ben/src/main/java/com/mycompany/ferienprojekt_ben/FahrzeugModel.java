@@ -33,6 +33,7 @@ public abstract class FahrzeugModel {
         this.fahrzeugNummer = fahrzeugNummer;
     }
 
+    //Gibt alle Variablen zurück, für ein einfacheres hinzufügen in eine ListView
     public ArrayList returnAllVar(){
         ArrayList<String> allVar = new ArrayList();
         
@@ -51,7 +52,7 @@ public abstract class FahrzeugModel {
         else if(inReperatur == false){
             allVar.add("Nicht in Reperatur");
         }
-        allVar.add("Stundenkosten: " + getStundenKosten());
+        allVar.add("Stundenkosten: " + getStundenKosten() + "€");
         
         return allVar;
     }
@@ -72,6 +73,14 @@ public abstract class FahrzeugModel {
         return allData;
     }
 
+    //Updatet die Variable Erhaeltlich anhand InBenutzung und InReperatur
+    public void updateErhealtlich(){
+        if(!(isInBenutzung()) && !(isInReperatur())){
+            setErhealtlich(true);
+        }
+        else{setErhealtlich(false);}
+    }
+    
     public String getModel() {
         return model;
     }

@@ -35,34 +35,43 @@ public class EditController implements Initializable {
     private ListView<String> lsItems;
     @FXML
     private TextField txtItemEdit;
-    private int indexOfItem;
-    private String arrOfItem;
     @FXML
     private Label lblInstructions;
-    
-    private GeschaeftskundeModel geschKunde;
-    private PrivatkundeModel privKunde;
-    
-    private PkwModel pkw;
-    private LkwModel lkw;
-    private VanModel van;
-    private AnhaengerModel anhaenger;
-    private mietenModel miete;
-    private int index;
-    private FahrzeugModel chosenFahrzeugForMiete;
-    private KundenModel chosenKundeForMiete;
     @FXML
     private CheckBox checkBox;
     @FXML
     private DatePicker datePickEdit;
     @FXML
     private ChoiceBox<String> choiceBoxTime;
-    private boolean inMieteChangeMode;
-    private String mieteEditChoice;
     @FXML
-    private Button anwendenBtn;
+    private Button anwendenBtn; 
     @FXML
     private Label lblWarning;
+    
+    //Hier wird das Objekt gespeichert, je nachdem welche Klasse es ist.
+    private GeschaeftskundeModel geschKunde;
+    private PrivatkundeModel privKunde;
+    private PkwModel pkw;
+    private LkwModel lkw;
+    private VanModel van;
+    private AnhaengerModel anhaenger;
+    private mietenModel miete;
+    
+    //Hier ist angegeben welche Klasse, und welchen Index, in der Jeweiligen ArrList, das Objekt ist.
+    private int indexOfItem;
+    private String arrOfItem;
+    //Der Index der Ausgewählten Zeile der ListView
+    private int index;
+    
+    //Das Ausgewählte Fahrzeug oder der Kunde, welche für die Miete ausgewählt wurde
+    private FahrzeugModel chosenFahrzeugForMiete;
+    private KundenModel chosenKundeForMiete;
+    
+    //Miete Change Mode ist, wenn in der ListView die Fahrzeuge oder Kunden angezeigt werden, um diese Auszuwählen
+    private boolean inMieteChangeMode;
+    //hier wird gespeichert, ob der Benutzer in einer Miete einen Kunden oder ein Fahrzeug ändern möchte
+    private String mieteEditChoice;
+    
     /**
      * Initializes the controller class.
      */
@@ -307,24 +316,31 @@ public class EditController implements Initializable {
             App.getKunden().add(indexOfItem - 1, k);
             
         }
+        //Falls eine Miete bearbeitet wird
         else if(!(miete == null)){
             if(inMieteChangeMode){
+                //Ob gerade Fahrzeuge oder Kunden geändert werden
                 switch(mieteEditChoice){
                     case "Fahrzeug": 
+                        //Er setzt das Fahrzeug, welches ausgewählt wurde.
                         App.getMieten().get(indexOfItem-1).setFahrzeug(chosenFahrzeugForMiete);
                         fillLsView();
                         break;
                     case "Kunde": 
+                        // same same
                         App.getMieten().get(indexOfItem-1).setKunde(chosenKundeForMiete);
                         fillLsView();
                         break;
 
                 }
+                //Verlässt den Fahrzeug/Kunden änderungsmodus
                 inMieteChangeMode = false;
             }
                 else{
                 switch(index){
                     case 0 : 
+                        //Änderung des StartDatums und der Startzeit
+                        //Es wird mehrmals überprüft, ob alle Eingaben konform sind.
                         if(choiceBoxTime.getValue() == null || datePickEdit.getValue() == null){System.out.println("err"); lblWarning.setText("Beide Felder müssen ausgefüllt sein.");}
                         else{
                             LocalDate dateStart = datePickEdit.getValue();
@@ -338,6 +354,8 @@ public class EditController implements Initializable {
                             fillLsView();}}
                         break;
                     case 1 : 
+                        //Änderung des EndDatums und der Endtzeit
+                        //Es wird mehrmals überprüft, ob alle Eingaben konform sind.
                         if(choiceBoxTime.getValue() == null || datePickEdit.getValue() == null){System.out.println("err"); lblWarning.setText("Beide Felder müssen ausgefüllt sein.");}
                         else{
                             LocalDate dateEnd = datePickEdit.getValue();
@@ -369,7 +387,7 @@ public class EditController implements Initializable {
         fillLsView();
     }
     
-    
+    //Erstellt die Zeit aus der ausgewählten ChoiceBox
     public LocalTime createLocalTime(){
         LocalTime time = null;
         switch(choiceBoxTime.getValue()){
@@ -464,19 +482,13 @@ public class EditController implements Initializable {
             });
         }
         
-        
-        System.out.println(pkw);
-        System.out.println(lkw);
-        System.out.println(van);
-        System.out.println(anhaenger);
-        System.out.println(privKunde);
-        System.out.println(geschKunde);
     }    
     
     
     
     
-    
+    //Wird ausgeführt, wenn man auf ein Item aus der ListView klickt, füllt 
+    //dann das TextFeld mit der entsprechenden Variable, oder enabled den DatePicker oder die CheckBox
     @FXML
     private void getListItemIndex(MouseEvent event) {
         lblWarning.setText("");
@@ -486,21 +498,25 @@ public class EditController implements Initializable {
         System.out.println(index);
         enableTextInput();
         if(inMieteChangeMode){
+            //Es wird geschaut, welches Fahrzeug oder Kunde ausgewählt ist für die Miete.
             index --;
             if(index == -1){} else {
             if("Fahrzeug".equals(mieteEditChoice)){
+                //Setzt das TextFeld mit dem jetzigem Objekt
                 txtItemEdit.setText(App.getFahrzeuge().get(index).hersteller + " " + App.getFahrzeuge().get(index).model);
+                //Nimmt das gewählte Objekt für das Ändern
                 chosenFahrzeugForMiete = App.getFahrzeuge().get(index);
-                //fillLsView();
             }
             else if("Kunde".equals(mieteEditChoice)){
+                //Setzt das TextFeld mit dem gewählten Objekt
                 txtItemEdit.setText(App.getKunden().get(index).vorname + " " + App.getKunden().get(index).nachname);
+                //Nimmt das gewählte Objekt für das Ändern
                 chosenKundeForMiete = App.getKunden().get(index);
-                
-                //fillLsView();
             }}
         }
         else{
+            //Sucht welches Objekt gerade bearbeitet wird, und angand des Indexes ist bekannt welches Feld geändert wird
+            //Dieses wird dann auch immer geändert
             if(pkw != null){
 
                 if(index == 0){
@@ -519,10 +535,10 @@ public class EditController implements Initializable {
                     lblInstructions.setText("Farbe:");
                 }
                 else if(index == 3){
+                    txtItemEdit.setDisable(true);
+                    anwendenBtn.setDisable(true);
                     txtItemEdit.clear();
-                    enableCheckBoxInput();
-                    checkBox.setSelected(pkw.inBenutzung); 
-                    lblInstructions.setText("Ist das Fahrzeug in Benutzung?");
+                    lblInstructions.setText("Kann nicht geändert werden!");
                 }
                 else if(index == 4){
                     txtItemEdit.clear();
@@ -565,10 +581,10 @@ public class EditController implements Initializable {
                     lblInstructions.setText("Farbe:");
                 }
                 else if(index == 3){
+                    txtItemEdit.setDisable(true);
+                    anwendenBtn.setDisable(true);
                     txtItemEdit.clear();
-                    enableCheckBoxInput();
-                    checkBox.setSelected(lkw.inBenutzung); 
-                    lblInstructions.setText("Ist das Fahrzeug in Benutzung?");
+                    lblInstructions.setText("Kann nicht geändert werden!");
                 }
                 else if(index == 4){
                     txtItemEdit.clear();
@@ -605,10 +621,10 @@ public class EditController implements Initializable {
                     lblInstructions.setText("Farbe:");
                 }
                 else if(index == 3){
+                    txtItemEdit.setDisable(true);
+                    anwendenBtn.setDisable(true);
                     txtItemEdit.clear();
-                    enableCheckBoxInput();
-                    checkBox.setSelected(van.inBenutzung); 
-                    lblInstructions.setText("Ist das Fahrzeug in Benutzung?");
+                    lblInstructions.setText("Kann nicht geändert werden!");
                 }
                 else if(index == 4){
                     txtItemEdit.clear();
@@ -647,10 +663,10 @@ public class EditController implements Initializable {
                     lblInstructions.setText("Farbe:");
                 }
                 else if(index == 3){
+                    txtItemEdit.setDisable(true);
+                    anwendenBtn.setDisable(true);
                     txtItemEdit.clear();
-                    enableCheckBoxInput();
-                    checkBox.setSelected(anhaenger.inBenutzung); 
-                    lblInstructions.setText("Ist das Fahrzeug in Benutzung?");
+                    lblInstructions.setText("Kann nicht geändert werden!");
                 }
                 else if(index == 4){
                     txtItemEdit.clear();
@@ -788,7 +804,8 @@ public class EditController implements Initializable {
         }
     }
     
-    
+    //Checkt ob der Eingegebene String Numerisch ist
+    //Natürlich aber nur bei den Variablen bei welchen ein Integer eingegeben werden soll
     private boolean checkForInt(){
         boolean isInt = true;
         if("".equals(txtItemEdit.getText())) {}
@@ -833,6 +850,7 @@ public class EditController implements Initializable {
         return isInt;
     }
     
+    //Wird aufgerufen, wenn es einen Input in ein TextFeld gab, falls es eine richtig
     @FXML
     private void checkInt(KeyEvent event) {
         if(!(checkForInt())){
@@ -847,7 +865,7 @@ public class EditController implements Initializable {
     }
     
     
-
+    //Helfermethoden um die jeweilige Input methode zu aktivieren und die anderen zu deaktivieren
     private void enableTextInput(){
         txtItemEdit.setVisible(true);
         txtItemEdit.setDisable(false);
@@ -888,6 +906,8 @@ public class EditController implements Initializable {
         checkBox.setVisible(false);
     }
     
+    
+    //Getter und Setter
     public int getIndexOfItem() {
         return indexOfItem;
     }
